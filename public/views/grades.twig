@@ -1,0 +1,102 @@
+<div class="row p-2">
+    <div class="col-9">
+        <h2>{{title}}</h2>
+        <h5>Turma x</h5>
+    </div>
+    <div class="col-3">
+    <select id="all_classes" class="form-select" aria-label="Default select example">
+        <option selected>Selecione uma turma</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        </select>
+    </div>
+</div>
+<div>
+    <div class="model_header row text-center">
+        <div class="col">Nome</div>
+        <div class="col">Matematica</div>
+        <div class="col">Ciências</div>
+        <div class="col">Portugês</div>
+        <div class="col">Status</div>
+        <div class="col">Ação</div>
+    </div>
+    <div id="all_grades"></div>
+    <div id="model_grades" class="row text-center align-items-center model d-none">
+        <div id="student" class="col">Ana Luiza De Sousa Silva</div>
+        <div id="math"class="col">100</div>
+        <div id="science"class="col">100</div>
+        <div id="pt"class="col">100</div>
+        <div id="status"class="col">Aprovada</div>
+        <div class="col">
+            <div class="row">
+                <button id="see_more" class="btn btn-primary col-3 default_btn">
+                    <i id="icon_eye" class="bi bi-eye-slash-fill"></i>
+                </button>
+                <div class="dropdown col-3" >
+                    <i class="bi bi-three-dots-vertical " data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <ul class="dropdown-menu">
+                            <li><a id="edit" class="dropdown-item" href="#">Editar notas</a></li>
+                            <li><a id="send_grades" class="dropdown-item" href="#">Lançar nota</a></li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+        <div id="info_model" class=" d-none mt-3">
+            <div class=" row text-center model_header">
+                <div class="col">História</div>
+                <div class="col">Geografia</div>
+                <div class="col">Arte</div>
+                <div class="col">Inglês</div>
+                <div class="col">Educação Física</div>
+            </div>
+            <div  class="row  text-center p-1 align-items-center mt-3">
+                <div  id="history"class="col">100</div>
+                <div id="geo"class="col">100</div>
+                <div id="art"class="col">100</div>
+                <div id="ingl"class="col">100</div>
+                <div id="fisics"class="col">100</div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<div  class="offcanvas offcanvas-end modal_grades" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Aluno(a)</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+     <div class="mb-3">
+            <label class="form-label">Matematica</label>
+            <input  class="form-control"  >
+        </div>
+        <div class="mb-3">
+           <label class="form-label">Ciências</label>
+            <input  class="form-control"  >
+        </div>
+        <div class="mb-3 ">
+           <label class="form-label">Portugês</label>
+            <input  class="form-control"  >
+        </div>
+        <div class="mb-3 ">
+            <label class="form-label">História</label>
+            <input  class="form-control"  >
+        </div>
+        <div class="mb-3 ">
+            <label class="form-label">Geografia</label>
+            <input  class="form-control"  >
+        </div>
+        <div class="mb-3 ">
+            <label class="form-label">Arte</label>
+            <input  class="form-control"  >
+        </div>
+        <div class="mb-3 ">
+            <label class="form-label">Educação Física</label>
+            <input  class="form-control"  >
+        </div>
+        <button  class="btn btn-primary">Salvar</button>
+  </div>
+</div>
+

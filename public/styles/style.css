@@ -1,0 +1,36 @@
+body{
+    overflow: hidden;
+}
+
+.teste{
+    color:orange;
+}
+.model_header{
+    background-color: #C0C0C0;
+    padding:15px ;
+    font-weight: bold;
+
+}
+.model{
+    padding:10px ;
+    margin-top: 5px;
+    border-bottom: solid 1px #D3D3D3;
+}
+.default_btn{
+    background-color: var(--first-color);
+    border: none;
+}
+.default_btn:hover{
+    background-color: rgb(40 118 89);
+    
+}
+.default_outline_btn{
+    background:transparent;
+    border-color: var(--first-color);
+    color: var(--first-color);
+}
+.default_outline_btn:hover{
+    background-color: #a74b11;
+    color:white;
+    
+}

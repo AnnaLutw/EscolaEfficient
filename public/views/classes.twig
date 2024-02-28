@@ -1,0 +1,76 @@
+<div class="row p-2">
+    <div class="col-11">
+        <h2>{{title}}</h2>
+    </div>
+    <div class="col-1">
+        <button id="add_class" type="button" class="btn btn-outline-success">+ Novo</button>
+    </div>
+    
+</div>
+
+<div>
+    <div class="model_header row text-center">
+        <div class="col">Nome</div>
+        <div class="col">Professor</div>
+        <div class="col">Quantidade alunos</div>
+        <div class="col">Status</div>
+        <div class="col">Ação</div>
+    </div>
+    <div id="all_classes"></div>
+    <div id="model_class" class="row text-center model d-none align-items-center">
+        <div id="name" class="col"></div>
+        <div id="teacher" class="col"></div>
+        <div id="students_size" class="col"></div>
+        <div id="status" class="col"></div>
+       <div class="dropdown col">
+       <i class="bi bi-three-dots" data-bs-toggle="dropdown"></i>
+        
+        <ul class="dropdown-menu">
+            <li><a id="edit" class="dropdown-item" href="#">Editar</a></li>
+            <li><a id="delete" class="dropdown-item" href="#">Desativar</a></li>
+        </ul>
+        </div>
+    </div>
+</div>
+
+<div  class="offcanvas offcanvas-end modal_class" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Professor(a)</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+     <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input  class="form-control"  >
+        </div>
+         <div class="mb-3 ">
+            <label class="form-label">Turmas</label>
+            <div class="row m-0">
+              <select  id="all_classes" class="form-select col-11" aria-label="Default select example">
+                  <option value="1">4° Ano Sala 5</option>
+                  <option value="2">5° Ano Sala 1</option>
+                  <option value="3">6° Ano Sala 2</option>
+              </select>
+              <button id="add_class" type="button" class="btn btn-outline-success col-12 mt-2">Adicione</button>
+            </div>
+            
+             <div id="emailHelp" class="form-text">Selecione duas turmas</div>
+        </div>
+       <div  id="chooses_classes"></div>
+
+       <div class="mb-3 ">
+            <label class="form-label">Professor(a)</label>
+            <div class="row m-0">
+              <select  id="all_classes" class="form-select col-11" aria-label="Default select example">
+                  <option value="1">Ana Luiza</option>
+                  <option value="2">Marcos</option>
+                  <option value="3">Joao</option>
+              </select>
+              <button id="add_teacher" type="button" class="btn btn-outline-success col-12 mt-2">Adicione</button>
+            </div>
+             <div id="emailHelp" class="form-text">Selecione um professor</div>
+        </div>
+        <button  class="btn btn-primary">Salvar</button>
+  </div>
+</div>
+

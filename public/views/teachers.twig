@@ -1,0 +1,65 @@
+<div class="row p-2">
+    <div class="col-11">
+        <h2>{{title}}</h2>
+    </div>
+    <div class="col-1">
+        <button id="add_teacher" type="button" class="btn btn-outline-success">+ Novo</button>
+    </div>
+    
+</div>
+
+<div>
+    <div class="model_header row text-center">
+        <div class="col">Nome</div>
+        <div class="col">Cpf</div>
+        <div class="col">E-mail</div>
+        <div class="col">Turmas</div>
+        <div class="col">Status</div>
+        <div class="col">Ação</div>
+    </div>
+    <div id="all_teachers"></div>
+    <div id="model_teacher" class="row text-center model d-none align-items-center">
+        <div id="name" class="col"></div>
+        <div id="cpf" class="col"></div>
+        <div id="email" class="col"></div>
+        <div id="classes" class="col">Quarto B, Quinto 7</div>
+        <div id="status" class="col"></div>
+       <div class="dropdown col">
+       <i class="bi bi-three-dots" data-bs-toggle="dropdown"></i>
+        
+        <ul class="dropdown-menu">
+            <li><a id="edit" class="dropdown-item" href="#">Editar</a></li>
+            <li><a id="delete" class="dropdown-item" href="#">Desativar</a></li>
+        </ul>
+        </div>
+    </div>
+</div>
+
+<div  class="offcanvas offcanvas-end modal_teacher" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Professor(a)</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+     <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input  class="form-control"  >
+        </div>
+        <div class="mb-3">
+           <label class="form-label">Cpf</label>
+            <input  class="form-control"  >
+        </div>
+        <div class="mb-3 ">
+            <label class="form-label">Email</label>
+            <input  class="form-control"  >
+        </div>
+         <div class="mb-3 ">
+            <label class="form-label">Senha</label>
+            <input  class="form-control"  >
+        </div>
+         
+       <div  id="chooses_classes"></div>
+        <button  class="btn btn-primary">Salvar</button>
+  </div>
+</div>
+

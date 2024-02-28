@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+    {% include 'head.twig'%}
+
+<body id="body-pd">
+     {% if sidebar %}
+        
+        {% include 'sidebar.twig' %}
+        
+    {% else %}
+
+         {% include  template %}
+
+    {% endif %}
+</body>
+    {% include 'footer.twig' %}
+
+</html>
