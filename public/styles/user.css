@@ -1,3 +1,7 @@
 .img_user{
     width: 200px;
 }
+.picture_bloco {
+    padding: 20px;
+    border-left: 1px solid var(--first-color);
+}

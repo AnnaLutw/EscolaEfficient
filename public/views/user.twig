@@ -1,20 +1,20 @@
-    <div class="row">
-        <div class="col-6 mt-2">
+    <div class="row height-100 ">
+        <div class="col-6  ">
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input  class="form-control"placeholder="Digite sua senha atual"  disabled>
+                <input  class="form-control"  disabled>
             </div>
             <div class="mb-3">
                 <label class="form-label">Senha Atual</label>
-                <input  class="form-control"  placeholder="Digite a nova senha">
+                <input  class="form-control" placeholder="Digite sua senha atual">
             </div>
             <div class="mb-3">
                 <label class="form-label">Nova senha</label>
-                <input  class="form-control" placeholder="Digite a nova senha novamente" >
+                <input  class="form-control" placeholder="Digite a nova senha " >
             </div>
              <div class="mb-3">
                 <label class="form-label">Nova senha novamente</label>
-                <input  class="form-control"  >
+                <input  class="form-control"   placeholder="Digite a nova senha novamente">
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -22,13 +22,32 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 mt-2 text-center">
+        <div class="col-6  text-center picture_bloco">
             <label class="form-label">Foto</label>
             <div class="text-center row flex-column align-items-center mt-2">
-                <img  src="https://i.imgur.com/hczKIze.jpg" class="rounded-circle img_user " alt="Foto do usuário" width="150">
-                <button class="btn default_outline_btn col-5 mt-4">Trocar imagem</button>
-
+                <img  id="view_picture"  src="https://i.imgur.com/hczKIze.jpg" class="rounded-circle img_user " alt="Foto do usuário" width="150">
+                <button id="btn_file" class="btn default_outline_btn col-5 mt-4"><input type="file" class="form-control" id="picture" hidden>Trocar imagem</button>
+             
             </div>
         </div>
     </div>
-     
+    
+    <div class="modal" id="crop_modal" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Recorte de Imagem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cropper_container">
+                        <img src="" id="cropper_image" style="max-width: 100%;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" id="save_crop">Cortar</button>
+                </div>
+            </div>
+        </div>
+    </div>

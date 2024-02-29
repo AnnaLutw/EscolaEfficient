@@ -5,13 +5,12 @@ class messagesHandler {
     }
 
     static newMessage(newMessage){
+        console.log(newMessage)
         const {message:msg} = new messagesHandler(newMessage);
-
         return $.notify(msg, "success"); 
     };
 
     static messageError(newError, error){
-        console.log(newError);
 
         if(error){
             const {message:msg} = new messagesHandler(newError);
