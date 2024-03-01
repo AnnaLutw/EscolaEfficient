@@ -39,11 +39,11 @@ router.get('/alunos', function(req, res){
 router.get('/turmas', function(req, res){
     sidebar = true
     res.render('index.twig', {
-        template:"../views/classes.twig",
+        template:"../views/teams.twig",
         sidebar,
-        style: '../styles/classes.css',
+        style: '../styles/teams.css',
         title:'Turmas',
-        script:'../scripts/classes.js'
+        script:'../scripts/teams.js'
     });
 });
 router.get('/novidades', function(req, res){

@@ -27,9 +27,8 @@ const request = async (method, route, body) => {
         const { content, status } = responseData;
 
         if (status !== 200) {
-            throw new Error(content); // Throw an error to be caught in the calling function
+            throw new Error(content); 
         }
-        console.log(status,content)
 
         return { content, status };
     } catch (error) {
@@ -38,10 +37,17 @@ const request = async (method, route, body) => {
 };
 
 
-const list = async (route, func) => {
+const list = async (route, callback) => {
     try {
-        const resposne = await request('GET', route, null)
-        return resposne.status != 200 ? messagesHandler.messageError() : func(resposne.content); 
+        const response = await request('GET', route, null);
+        if (typeof callback !== 'function') 
+        {
+            console.log(response.content)
+            return response.status != 200 ? messagesHandler.messageError() : response.content; 
+
+        }
+        return response.status != 200 ? messagesHandler.messageError() : callback(response.content); 
+
     } catch (error) {
         throw messagesHandler.messageError(error);
     }
@@ -58,4 +64,45 @@ const constructor = (body, ctx) => {
 
     return result;
 };
+const maskOut = (val)=>{
+    try{
+        return val.replace(/\D/g, '');;
+    }catch(error){
+        throw messagesHandler.messageError(error);
+    }
+}
+const closeModal = (ctx)=>{
+    try{
+        $(ctx).modal('hide')
+        $(ctx).offcanvas('hide')
+        $(ctx).find('#save').deleteAttr('id')
+        $(ctx).find('input').val('');
+    }catch(error){
+        throw messagesHandler.messageError(error);
+    }
+}
 
+
+const formatCpf = (val) => {
+    try {
+        const cleanedCpf = val.replace(/\D/g, '');
+        return cleanedCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');;
+    } catch (error) {
+        throw error;
+    }
+};
+
+const formatCellphone = (val) => {
+    try {
+        const cleanedNumber = val.replace(/\D/g, '');
+
+        if (cleanedNumber.length === 11) {
+            const formattedNumber = cleanedNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) 9$2-$3');
+            return formattedNumber;
+        } else {
+            return val;
+        }
+    } catch (error) {
+        throw error;
+    }
+};

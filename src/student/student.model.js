@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
-const teacherSchema = new mongoose.Schema({
+const studentSchema = new mongoose.Schema({
     name: { type: String, required: true }, 
     cpf: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true },
+    contact: { type: String, required: true, unique: true },
     turmas: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Turma' }],
-    status: { type: Number, default: 1 }, 
+    status: { type: Number, default: 1 },
 }, { timestamps: true }); 
 
-const Teacher = mongoose.model('Teacher', teacherSchema);
+const Student = mongoose.model('Student', studentSchema);
 
-module.exports = Teacher;
+module.exports = Student;
  

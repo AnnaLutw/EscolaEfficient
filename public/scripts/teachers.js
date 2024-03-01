@@ -5,7 +5,8 @@ const teacherValues = ()=>{
         const name = $(ctx).find('#name').val()
         const cpf = $(ctx).find('#cpf').val()
         const email = $(ctx).find('#email').val()
-        return {name,cpf,email}
+        formatedCpf = maskOut(cpf)
+        return {name,cpf:formatedCpf,email}
     }catch(error){
         messagesHandler.messageError(error)
     } 
@@ -15,26 +16,41 @@ const save = async(id)=>{
     try{
         const method = id ? 'PUT': 'POST'
         const body = teacherValues()
-        const {status, content} = id ? await request(method, `teacher/${id}`) : await request(method, `teacher`, body)
+        const {status, content} = id ? await request(method, `teacher/${id}`, body) : await request(method, `teacher`, body)
         console.log(status)
-        status !== 200 ? messagesHandler.messageError(content) : messagesHandler.newMessage(content)
-        list('teacher', listAllTeachers)
+        status !== 200 ? messagesHandler.messageError(content)  : messagesHandler.newMessage(content)
+        closeModal('.modal_teacher')
+        await list('teacher', listAllTeachers)
     }catch(error){
         messagesHandler.messageError(error)
     }
 }
 const deleteTeacher = async(id)=>{
     try{
-        const cfm = confirm('Deseja mudar o status?')
+        const cfm = confirm('Deseja mudar o status?')   
         if(!cfm){
             return
         }
         const {status, content} = await request('DELETE', `teacher/${id}`)
         console.log(status, content)
         status !== 200 ? messagesHandler.messageError(content) : messagesHandler.newMessage(content)
-        list('teacher', listAllTeachers)
+        await list('teacher', listAllTeachers)
     }catch(error){
         messagesHandler.messageError(error)
+    }
+}
+const listSingleTeacher = (content)=>{
+    try{
+        const ctx = '.modal_teacher'
+
+        $(ctx).find('#name').val(content.name)
+        $(ctx).find('#email').val(content.email)
+        $(ctx).find('#cpf').val(content.cpf)
+        $(ctx).find('#save').attr('val', content._id)
+
+    }catch(error){
+        messagesHandler.messageError(error)
+
     }
 }
 const listAllTeachers = (content) => {
@@ -46,10 +62,12 @@ const listAllTeachers = (content) => {
                 const model = $('#model_teacher').clone()[0];
 
                 $(model).find('#name').text(teacher.name);
-                $(model).find('#cpf').text(teacher.cpf);
+                $(model).find('#cpf').text(formatCpf(teacher.cpf));
                 $(model).find('#email').text(teacher.email);
                 $(model).find('#delete').attr('val', teacher._id).text(teacher.status === 0 ? 'Ativar' : 'Desativar');
-                $(model).find('#edit').attr('val', teacher._id);
+                $(model).find('#edit').attr('val', teacher._id).toggleClass('d-none', teacher.status === 0);
+
+
                 $(model).find('#status').text(teacher.status === 0 ? 'Desativado' : 'Ativado')
                     .removeClass(teacher.status === 0 ? 'text-success' : 'text-danger')
                     .addClass(teacher.status === 0 ? 'text-danger' : 'text-success');
@@ -73,9 +91,14 @@ const listAllTeachers = (content) => {
 
 list('teacher', listAllTeachers)
 
-$(document).ready(() => {
-    $('body').on('click', '#edit', () => {
+ $(() => {
+
+    $('.modal_teacher').find('#cpf').mask('000.000.000-00', {reverse: true});
+
+    $('body').on('click', '#edit', (e) => {
         try {
+            const id = $(e.currentTarget).attr('val')
+            list(`teacher/${id}`, listSingleTeacher)
             $('.modal_teacher').offcanvas('show'); 
         } catch (error) {
             messagesHandler.messageError(error)
@@ -101,9 +124,18 @@ $(document).ready(() => {
     });
     $('.modal_teacher').on('click', '#save', async(e) => {
         try {
-            console.log('aaa')
-           
             await save($(e.currentTarget).attr('val'))
+        } catch (error) {
+            messagesHandler.messageError(error)
+
+        }
+    });
+     $('.modal_teacher').on('click', '.btn-close', async(e) => {
+        try {
+            console.log('aaa')
+
+            closeModal('.modal_teacher')
+
         } catch (error) {
             messagesHandler.messageError(error)
 

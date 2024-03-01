@@ -34,3 +34,32 @@ body{
     color:white;
     
 }
+
+
+.searchInput {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    font-size: 16px;
+}
+
+.options-list {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    width: auto;
+    position: absolute;
+    background-color: white;
+    margin-top: 42px;
+}
+
+.option-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.option-item:hover {
+    background-color: #f0f0f0;
+}

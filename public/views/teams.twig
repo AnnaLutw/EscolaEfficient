@@ -1,0 +1,79 @@
+<div class="row p-2">
+    <div class="col-11">
+        <h2>{{title}}</h2>
+    </div>
+    <div class="col-1">
+        <button id="add_team" type="button" class="btn default_outline_btn">+ Novo</button>
+    </div>
+    
+</div>
+
+<div>
+    <div class="model_header row text-center">
+        <div class="col">Nome</div>
+        <div class="col">Professor</div>
+        <div class="col">Quantidade alunos</div>
+        <div class="col">Status</div>
+        <div class="col">Ação</div>
+    </div>
+    <div id="all_teams"></div>
+    <div id="model_teams" class="row text-center model d-none align-items-center">
+        <div id="name" class="col"></div>
+        <div id="teacher" class="col"></div>
+        <div id="students_size" class="col"></div>
+        <div id="status" class="col"></div>
+       <div class="dropdown col">
+       <i class="bi bi-three-dots" data-bs-toggle="dropdown"></i>
+        
+        <ul class="dropdown-menu">
+            <li><a id="see_students" class="dropdown-item" href="#">Ver alunos</a></li>
+            <li><a id="edit" class="dropdown-item" href="#">Editar</a></li>
+            <li><a id="delete" class="dropdown-item" href="#">Desativar</a></li>
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade modal_team"  aria-hidden="true"  tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" >Turma</h1>
+        <button type="button" class="btn-close" d aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="mb-3 ">
+                    <label class="form-label">Nome</label>
+                    <input  class="form-control"  placaholder="Digite o nome da turma">
+                </div>
+                <div class="mb-3 ">
+                    <label class="form-label">Professores</label>
+                    <div class="row m-0">
+                         <input type="text" id="all_teachers_input" class="searchInput" placeholder="Pesquise um professor">
+                        <div id="all_teachers" class="options-list d-none"></div>  
+                    </div>
+                </div>
+                <button id="add_teacher" type="button" class="btn default_outline_btn">Adicionar</button>
+
+                <div class="mb-3 ">
+                    <label class="form-label">Alunos</label>
+                    <div class="row m-0">
+                         <input type="text" id="all_students_input" class="searchInput" placeholder="Pesquise um aluno">
+                        <div id="all_students" class="options-list d-none"></div>   
+                    </div>
+                </div>
+                <button id="add_student" type="button" class="btn default_outline_btn">Adicionar</button>
+
+            </div>
+            <div class="" id="chooses_teachers"></div>
+        </div>
+        </div>
+      <div class="modal-footer">
+        <button id="save" class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
+      </div>
+    </div>
+  </div>
+</div>

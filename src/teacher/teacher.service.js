@@ -37,6 +37,33 @@ const changeStatusById = async (id) => {
     }
 };
 
+const getById = async (id) => {
+    try {
+        let teacher = await TeacherModel.findById(id);
+        return {status:200 , content:teacher};
+
+    } catch (error) {
+        return { status:200, content: error.message };
+    }
+};
+const change = async (id, body) => {
+    try {
+        let teacher = await TeacherModel.findById(id);
+
+        if (!teacher) {
+            return { status: 404, content: "Professor not found" };
+        }
+
+        teacher.name = body.name;
+        teacher.cpf = body.cpf;
+        teacher.email = body.email;
+
+        await teacher.save(); 
+        return { status: 200, content: 'update' };
+    } catch (error) {
+        return { status: 500, content: error.message };
+    }
+};
 
 
-module.exports = { createTeacher, getAllTeachers, changeStatusById };
+module.exports = { createTeacher, getAllTeachers, changeStatusById, getById, change };
