@@ -27,7 +27,7 @@ const request = async (method, route, body) => {
         const { content, status } = responseData;
 
         if (status !== 200) {
-            throw new Error(content); 
+            messagesHandler.messageError(content)
         }
 
         return { content, status };
@@ -42,7 +42,6 @@ const list = async (route, callback) => {
         const response = await request('GET', route, null);
         if (typeof callback !== 'function') 
         {
-            console.log(response.content)
             return response.status != 200 ? messagesHandler.messageError() : response.content; 
 
         }
@@ -75,7 +74,7 @@ const closeModal = (ctx)=>{
     try{
         $(ctx).modal('hide')
         $(ctx).offcanvas('hide')
-        $(ctx).find('#save').deleteAttr('id')
+        $(ctx).find('#save').deleteAttr('val')
         $(ctx).find('input').val('');
     }catch(error){
         throw messagesHandler.messageError(error);

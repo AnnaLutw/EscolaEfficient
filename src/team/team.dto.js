@@ -1,9 +1,9 @@
 class TeamDTO {
-    constructor(id, name, students, teachers) {
+    constructor(id, name, students, teacher) {
         this.id = id; 
         this.name = name;
         this.students = students;
-        this.teachers = teachers;
+        this.teacher = teacher;
     }
     
 }

@@ -28,7 +28,14 @@ router.delete('/team/:id', async ({ params }, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
+router.delete('/team/student/:id', async ({ params }, res) => {
+    try {
+        const team = await service.deleteStudent(params.id); 
+        res.status(200).json(team);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 router.get('/team/:id', async ({ params }, res) => {
     try {
         const team = await service.getById(params.id); 
