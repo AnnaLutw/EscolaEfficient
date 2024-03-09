@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { create } = require('../helpers/helpers');
 const TeacherDTO = require('./teacher.dto');
 const TeacherModel = require('./teacher.model');
+const TeamModel = require('../team/team.model');
 
 const createTeacher = async (teacher) => {
     try {
@@ -15,13 +16,23 @@ const createTeacher = async (teacher) => {
 
 const getAllTeachers = async () => {
     try {
-        const teachers = await TeacherModel.find().select('name cpf email turmas status');
-        return {content: teachers,status: 200};
+        const teachers = await TeacherModel.find();
+        const updatedTeachers = await Promise.all(teachers.map(async (teacher) => {
+            const turmas = await TeamModel.find({ teacher: teacher._id });
+            if (turmas.length > 0) {
+                teacher.turmas = turmas.map(turma => turma.name);
+            } else {
+                teacher.turmas = null;
+            }
+            return teacher;
+        }));
+        return { content: updatedTeachers, status: 200 };
     } catch (error) {
-     
-        return  { error: error.message,status: 500};
+        return { error: error.message, status: 500 };
     }
 };
+
+
 const changeStatusById = async (id) => {
     try {
         let teacher = await TeacherModel.findById(id);

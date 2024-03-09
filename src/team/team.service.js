@@ -13,7 +13,14 @@ const createTeam = async (team) => {
         
         const newTeam = new TeamDTO(null, team.name, team.students, team.teacher);
         await create(TeamModel.schema, newTeam, 'team');
-        
+
+        // let student = await studentModel.findById(id);
+        // if (!student) {
+        //     return { status: 404, content: "Student not found" };
+        // }
+        // student.turma = body.name;
+
+
         return { content: newTeam, status: 200 };
     } catch (error) {
         return { error: error.message, status: 500 };

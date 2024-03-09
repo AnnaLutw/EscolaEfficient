@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 const { create } = require('../helpers/helpers');
 const studentDTO = require('./student.dto');
 const studentModel = require('./student.model');
+const TeamModel = require('../team/team.model');
 
 const createStudent = async (student) => {
     try {
-        const newstudent = new studentDTO(null, student.name, student.cpf, student.contact, [], student.status);
+        const newstudent = new studentDTO(null, student.name, student.cpf, student.contact, null, student.status);
         await create(studentModel.schema, newstudent, 'students'); 
         return {content: student,status: 200};
     } catch (error) {
@@ -15,13 +16,32 @@ const createStudent = async (student) => {
 
 const getAllStudents = async () => {
     try {
-        const students = await studentModel.find()
-        return {content: students,status: 200};
+        const students = await studentModel.find();
+        const updatedStudents = await Promise.all(students.map(async (student) => {
+            const turma = await TeamModel.findOne({ students: student._id });
+            console.log(turma)
+            if (turma) {
+                console.log(turma)
+                student.turma = turma.name;
+            } else {
+                student.turma = null;
+            }
+            return student;
+        }));
+        return { content: updatedStudents, status: 200 };
     } catch (error) {
-     
-        return  { error: error.message,status: 500};
+        return { error: error.message, status: 500 };
     }
 };
+
+
+
+
+
+
+
+
+
 const changeStatusById = async (id) => {
     try {
         let student = await studentModel.findById(id);

@@ -1,17 +1,32 @@
 <div class="row p-2">
-    <div class="col-9">
+    <div class="col-4">
         <h2>{{title}}</h2>
         <h5>Turma x</h5>
     </div>
     <div class="col-3">
-    <select id="all_classes" class="form-select" aria-label="Default select example">
-        <option selected>Selecione uma turma</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-        </select>
+       <div class="mb-3 ">
+			<label class="form-label">Turmas</label>
+			<div class="row">
+                <div class="col-8">
+                    <input type="text" id="all_teams_input" class="searchInput" placeholder="Pesquise uma turma">
+					<div id="all_teams" class="options-list d-none"></div>
+                </div>
+				</div>
+			</div>
     </div>
-</div>
+    <div class="col-3">
+       <div class="mb-3 ">
+			<label class="form-label">Alunos</label>
+			<div class="row">
+                <div class="col-8">
+                    <input type="text" id="all_students_input" class="searchInput" placeholder="Pesquise um aluno">
+					<div id="all_students" class="options-list d-none"></div>
+                </div>
+				</div>
+			</div>
+    </div>
+	<button id="add_grade" type="button" class="btn default_outline_btn col-2">Lançar nota</button>
+
 <div>
     <div class="model_header row text-center">
         <div class="col">Nome</div>
@@ -62,9 +77,9 @@
     
 </div>
 
-<div  class="offcanvas offcanvas-end modal_grades" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+<div  class="offcanvas offcanvas-end modal_grades" tabindex="-1"  aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">Aluno(a)</h5>
+    <h5 class="offcanvas-title">Aluno(a)</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">

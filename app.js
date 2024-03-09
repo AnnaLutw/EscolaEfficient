@@ -17,9 +17,11 @@ app.use('/api', (req, res, next) => {
     const teacherController = require('./src/teacher/teacher.controller.js');
     const studentController = require('./src/student/student.controller.js');
     const teamsController = require('./src/team/team.controller.js');
+    const gradeController = require('./src/grade/grade.controller.js');
     app.use('/api', teacherController);
     app.use('/api', studentController);
     app.use('/api', teamsController);
+    app.use('/api', gradeController);
     next();
 });
 

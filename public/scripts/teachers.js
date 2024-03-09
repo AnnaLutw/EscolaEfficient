@@ -55,12 +55,14 @@ const listSingleTeacher = (content)=>{
 }
 const listAllTeachers = (content) => {
     try {
-        if (content && Array.isArray(content)) {
+        if (content || Array.isArray(content)) {
+            console.log(content)
+
             const ctx = '#all_teachers';
             $(ctx).empty()
             content.forEach(teacher => {
                 const model = $('#model_teacher').clone()[0];
-
+                console.log(teacher)
                 $(model).find('#name').text(teacher.name);
                 $(model).find('#cpf').text(formatCpf(teacher.cpf));
                 $(model).find('#email').text(teacher.email);
@@ -72,10 +74,15 @@ const listAllTeachers = (content) => {
                     .removeClass(teacher.status === 0 ? 'text-success' : 'text-danger')
                     .addClass(teacher.status === 0 ? 'text-danger' : 'text-success');
                 $(model).find('#classes').empty();
-                teacher.turmas.forEach(classInfo => {
-                    const classElement = $('<div>').text(classInfo.name);
-                    $(model).find('#classes').append(classElement);
-                });
+                if(teacher.turmas){
+                    teacher.turmas.forEach(turma => {
+                        const classElement = $('<div>').text(turma);
+                        $(model).find('#classes').append(classElement);
+                    });
+                }else{
+                    $(model).find('#classes').text('Sem turmas');
+                }
+                
                 $(model).removeClass('d-none');
                 $(ctx).append(model);
             });

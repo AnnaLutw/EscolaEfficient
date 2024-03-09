@@ -48,7 +48,7 @@ body{
     border-radius: 5px;
     max-height: 200px;
     overflow-y: auto;
-    width: auto;
+    min-width: 12%;
     position: absolute;
     background-color: white;
 }
@@ -60,4 +60,7 @@ body{
 
 .option-item:hover {
     background-color: #f0f0f0;
+}
+.offcanvas{
+    width: 700px !important;
 }

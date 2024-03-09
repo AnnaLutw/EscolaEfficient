@@ -1,10 +1,10 @@
 class StudentDTO {
-    constructor(id, name, cpf, contact, turmas, status) {
+    constructor(id, name, cpf, contact, turma, status) {
         this.id = id; 
         this.name = name;
         this.cpf = cpf;
         this.contact = contact;
-        this.turmas = turmas;
+        this.turma = turma;
         this.status = status;
     }
     

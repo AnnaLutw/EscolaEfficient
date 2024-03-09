@@ -9,7 +9,6 @@ const grades = [
         geo:1,
         art:1,
         ingl:1,
-        fisics:1,
         status:1
     },
     {
@@ -22,12 +21,12 @@ const grades = [
         geo:8,
         art:7,
         ingl:1,
-        fisics:1,
         status:0
     }
 ]
-const listAllGrades = ()=>{
+const listAllGrades = (content)=>{
     try{
+        console.log(content)
         const ctx =   '#all_grades'  
 
         grades.forEach(grade =>{
@@ -40,7 +39,6 @@ const listAllGrades = ()=>{
             $(model).find('#geo').text(grade.geo)
             $(model).find('#art').text(grade.art)
             $(model).find('#ingl').text(grade.ingl)
-            $(model).find('#fisics').text(grade.fisics)
             $(model).find('#edit').attr('id', grade._id)
             $(model).find('#status').text('Aprovado').addClass('text-success')
 
@@ -54,9 +52,29 @@ const listAllGrades = ()=>{
         console.log(error);
     }
 }
-listAllGrades()
+const init=async() =>{
+    try{
+        let content = await list('team', false);
+        fillOptionsList(content, $('#all_teams'), $('#all_teams_input'));
+        content = await list('student', false);
+        fillOptionsList(content, $('#all_students'), $('#all_students_input'));
+    }catch(error){
+        console.log(error);
+    }
+}
+list('grade', listAllGrades)
 $(document).ready(() => {
+    init()
+  
+
     $('body').on('click', '#edit', () => {
+        try {
+            $('.modal_grades').offcanvas('show'); 
+        } catch (error) {
+            console.log(error);
+        }
+    });
+    $('body').on('click', '#add_grade', () => {
         try {
             $('.modal_grades').offcanvas('show'); 
         } catch (error) {

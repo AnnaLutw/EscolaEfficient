@@ -60,13 +60,16 @@ const listSingleStudent = (content)=>{
 }
 const listAllStudents = (content) => {
     try {
-        if (content && Array.isArray(content)) {
+        if (content || Array.isArray(content)) {
             const ctx = '#all_students';
             $(ctx).empty()
             content.forEach(student => {
+                console.log(student)
+
                 const model = $('#model_student').clone()[0];
 
                 $(model).find('#name').text(student.name);
+                $(model).find('#team').text(student.turma ? student.turma : 'Sem turma');
                 $(model).find('#cpf').text(formatCpf(student.cpf));
                 $(model).find('#contact').text(formatCellphone(student.contact));
                 $(model).find('#delete').attr('val', student._id).text(student.status === 0 ? 'Ativar' : 'Desativar');
@@ -76,10 +79,7 @@ const listAllStudents = (content) => {
                     .removeClass(student.status === 0 ? 'text-success' : 'text-danger')
                     .addClass(student.status === 0 ? 'text-danger' : 'text-success');
                 $(model).find('#classes').empty();
-                student.turmas.forEach(classInfo => {
-                    const classElement = $('<div>').text(classInfo.name);
-                    $(model).find('#classes').append(classElement);
-                });
+              
                 $(model).removeClass('d-none');
                 $(ctx).append(model);
             });
