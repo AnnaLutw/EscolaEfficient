@@ -82,7 +82,7 @@ router.get('/notas', function(req, res){
     res.render('index.twig', {
         template:"../views/grades.twig",
         sidebar,
-        style: '../styles/grades.css',
+        style: '../styles/grade.css',
         title:'Notas escolares',
         script:'../scripts/grades.js'
     });

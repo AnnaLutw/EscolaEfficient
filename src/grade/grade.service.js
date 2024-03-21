@@ -96,4 +96,4 @@ const change = async (id, body) => {
 
 
 
-module.exports = { createGrade, getAll, changeStatusById, getById, change };
+module.exports = {  getAll, changeStatusById, getById, change };

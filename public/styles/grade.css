@@ -1,0 +1,6 @@
+.nav-pills{
+    flex-direction: row;
+}
+.active {
+    color:black;
+}

@@ -25,7 +25,6 @@
 				</div>
 			</div>
     </div>
-	<button id="add_grade" type="button" class="btn default_outline_btn col-2">Lançar nota</button>
 
 <div>
     <div class="model_header row text-center">
@@ -51,8 +50,7 @@
                 <div class="dropdown col-3" >
                     <i class="bi bi-three-dots-vertical " data-bs-toggle="dropdown" aria-expanded="false"></i>
                         <ul class="dropdown-menu">
-                            <li><a id="edit" class="dropdown-item" href="#">Editar notas</a></li>
-                            <li><a id="send_grades" class="dropdown-item" href="#">Lançar nota</a></li>
+                            <li><a id="add_grade" class="dropdown-item" href="#">Editar notas</a></li>
                         </ul>
                 </div>
             </div>
@@ -76,42 +74,89 @@
     </div>
     
 </div>
+<div class="modal modal_grades" tabindex="-1">
+  <div class="modal-dialog  modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+       <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="port-tab" data-bs-toggle="pill" data-bs-target="#port" type="button" role="tab" aria-controls="pills-port" aria-selected="true">Portugês</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="mathm-tab" data-bs-toggle="pill" data-bs-target="#mathm" type="button" role="tab" aria-controls="pills-mathm" aria-selected="false">Matematica</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="cienc-tab" data-bs-toggle="pill" data-bs-target="#cienc" type="button" role="tab" aria-controls="pills-cienc" aria-selected="false">Ciencias</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="geog-tab" data-bs-toggle="pill" data-bs-target="#geog" type="button" role="tab" aria-controls="pills-geog" aria-selected="false">Geografia</button>
+            </li>
+             <li class="nav-item" role="presentation">
+                <button class="nav-link" id="his-tab" data-bs-toggle="pill" data-bs-target="#his" type="button" role="tab" aria-controls="pills-his" aria-selected="false">Historia</button>
+            </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="ing-tab" data-bs-toggle="pill" data-bs-target="#ing" type="button" role="tab" aria-controls="pills-ing" aria-selected="false">Inglês</button>
+            </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="arts-tab" data-bs-toggle="pill" data-bs-target="#arts" type="button" role="tab" aria-controls="pills-arts" aria-selected="false">Artes</button>
+            </li>
+        </ul>
+       
+      </div>
+      <div class="modal-body texe-black">
+         <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="port" role="tabpanel" aria-labelledby="port-tab" tabindex="0">
+                {%include './models/activitys.twig'%}
+            </div>
+            <div class="tab-pane fade" id="mathm" role="tabpanel" aria-labelledby="mathm-tab" tabindex="0">
+                   <div class="row">
+                {# <div class="col-6">
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <label class="form-label">Nome atividade</label>
+                            <input id="cpf" class="form-control"  >
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label">Pontos</label>
+                            <input id="contact" class="form-control"  >
+                        </div>
+                    </div>
+                     
+                    <button id="new_activity" type="button" class="btn default_outline_btn">Nova atividade</button>
 
-<div  class="offcanvas offcanvas-end modal_grades" tabindex="-1"  aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title">Aluno(a)</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-     <div class="mb-3">
-            <label class="form-label">Matematica</label>
-            <input  class="form-control"  >
+                </div> #}
+                 <div class="col-6">
+                    <h5>Atividades</h5>
+                    <div id="all_activitys_math"></div>
+                    <div class="row d-none" id="model_activity_math ">
+                        <div class="col" id="name_math">Atividade 3</div>
+                        <div class="col"  id="point_math">5.0</div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="tab-pane fade" id="cienc" role="tabpanel" aria-labelledby="cienc-tab" tabindex="0">
+                {%include './models/activitys.twig'%}
+            </div>
+            <div class="tab-pane fade" id="geog" role="tabpanel" aria-labelledby="geog-tab" tabindex="0">
+                {%include './models/activitys.twig'%}
+            </div>
+            <div class="tab-pane fade" id="his" role="tabpanel" aria-labelledby="his-tab" tabindex="0">
+                {%include './models/activitys.twig'%}
+            </div>
+            <div class="tab-pane fade" id="ing" role="tabpanel" aria-labelledby="ing-tab" tabindex="0">
+                {%include './models/activitys.twig'%}
+            </div>
+            <div class="tab-pane fade" id="arts" role="tabpanel" aria-labelledby="arts-tab" tabindex="0">
+                {%include './models/activitys.twig'%}
+            </div>
         </div>
-        <div class="mb-3">
-           <label class="form-label">Ciências</label>
-            <input  class="form-control"  >
-        </div>
-        <div class="mb-3 ">
-           <label class="form-label">Portugês</label>
-            <input  class="form-control"  >
-        </div>
-        <div class="mb-3 ">
-            <label class="form-label">História</label>
-            <input  class="form-control"  >
-        </div>
-        <div class="mb-3 ">
-            <label class="form-label">Geografia</label>
-            <input  class="form-control"  >
-        </div>
-        <div class="mb-3 ">
-            <label class="form-label">Arte</label>
-            <input  class="form-control"  >
-        </div>
-        <div class="mb-3 ">
-            <label class="form-label">Educação Física</label>
-            <input  class="form-control"  >
-        </div>
-        <button  class="btn default_btn">Salvar</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
 

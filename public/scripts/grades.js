@@ -24,9 +24,140 @@ const grades = [
         status:0
     }
 ]
+const gradesPoints = [
+    {
+        id: '1',
+        student: 'Ana Luiza',
+        assigments: [
+            {
+                mathm: [
+                    {
+                        id: '1',
+                        activity: 'Atividade 1',
+                        point: '5'
+                    },
+                    {
+                        id: '2',
+                        activity: 'Atividade 3',
+                        point: '5'
+                    }
+                ],
+                cienc: [
+                    {
+                        id: '1',
+                        activity: 'Atividade 1',
+                        point: '5'
+                    },
+                    {
+                        id: '2',
+                        activity: 'Atividade 3',
+                        point: '5'
+                    }
+                ],
+                port: [
+                    {
+                        id: '1',
+                        activity: 'Atividade 1',
+                        point: '5'
+                    },
+                    {
+                        id: '2',
+                        activity: 'Atividade 3',
+                        point: '5'
+                    }
+                ],
+                his: [
+                    {
+                        id: '1',
+                        activity: 'Atividade 1',
+                        point: '5'
+                    },
+                    {
+                        id: '2',
+                        activity: 'Atividade 3',
+                        point: '5'
+                    }
+                ],
+                geog: [
+                    {
+                        id: '1',
+                        activity: 'Atividade 1',
+                        point: '5'
+                    },
+                    {
+                        id: '2',
+                        activity: 'Atividade 3',
+                        point: '5'
+                    }
+                ],
+                arts: [
+                    {
+                        id: '1',
+                        activity: 'Atividade 1',
+                        point: '5'
+                    },
+                    {
+                        id: '2',
+                        activity: 'Atividade 3',
+                        point: '5'
+                    }
+                ],
+                ing: [
+                    {
+                        id: '1',
+                        activity: 'Atividade 1',
+                        point: '5'
+                    },
+                    {
+                        id: '2',
+                        activity: 'Atividade 3',
+                        point: '5'
+                    }
+                ],
+            }
+        ]
+    }
+];
+// const listSingleGrade = () => {
+//     try {
+//         gradesPoints.forEach(student => {
+//             Object.keys(student.assigments[0]).forEach(subject => {
+//                 student.assigments[0][subject].forEach(activity => {
+//                     console.log(activity)
+//                     const model = $('#' + subject).closest('#model_activity').clone();
+//                     $(model).find('#name').text(activity.activity);
+//                     $(model).find('#point').text(activity.point);
+//                     $(model).removeClass('d-none');
+//                     $(model).appendTo($('#' + subject).closest('#all_activitys'));
+//                 });
+//             });
+//         });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
+const listSingleGrade = () => {
+    try {
+        const ctx = $('#all_activitys_math');
+        $(ctx).empty();
+
+        gradesPoints[0].assigments[0].mathm.forEach(activity => {
+            console.log(activity);
+            const model = $('#model_activity_math').clone();
+            $(model).find('#name_math').text(activity.activity);
+            $(model).find('#point_math').text(activity.point);
+            $(model).removeClass('d-none');
+            $(ctx).append(model);
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+
 const listAllGrades = (content)=>{
     try{
-        console.log(content)
         const ctx =   '#all_grades'  
 
         grades.forEach(grade =>{
@@ -39,7 +170,7 @@ const listAllGrades = (content)=>{
             $(model).find('#geo').text(grade.geo)
             $(model).find('#art').text(grade.art)
             $(model).find('#ingl').text(grade.ingl)
-            $(model).find('#edit').attr('id', grade._id)
+            $(model).find('#add_grade').attr('value', grade._id)
             $(model).find('#status').text('Aprovado').addClass('text-success')
 
             if(grade.status == 0){
@@ -69,14 +200,16 @@ $(document).ready(() => {
 
     $('body').on('click', '#edit', () => {
         try {
-            $('.modal_grades').offcanvas('show'); 
+            $('.modal_grades').modal('show'); 
         } catch (error) {
             console.log(error);
         }
     });
-    $('body').on('click', '#add_grade', () => {
+    $('body').on('click', '#add_grade', (e) => {
         try {
-            $('.modal_grades').offcanvas('show'); 
+            listSingleGrade()
+            $('.modal_grades').modal('show'); 
+
         } catch (error) {
             console.log(error);
         }
