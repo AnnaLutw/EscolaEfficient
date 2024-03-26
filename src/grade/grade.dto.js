@@ -1,9 +1,8 @@
 class GradeDTO {
-    constructor(id, aluno, turma, status, notas) {
+    constructor(id, disciplina, total) {
         this.id = id; 
-        this.aluno = aluno;
-        this.status = status;
-        this.notas = notas;
+        this.disciplina = disciplina;
+        this.total = total
     }
 }
 

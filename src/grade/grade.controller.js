@@ -2,14 +2,16 @@ const express = require('express');
 const router = express.Router();
 const service = require('./grade.service');
 
-router.post('/grade', async (req, res) => {
-    try {
-        const createdgrade = await service.createGrade(req.body);
-        res.status(200).json(createdgrade);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+// router.post('/grade/activity/:id', async ({params, body }, res) => {
+//     try {
+//         const createdActivity = await service.createActivity(params.id, body);
+//         res.status(200).json(createdActivity);
+//     } catch (error) {
+//         res.status(500).json({ error: error.message });
+//     }
+// });
+
+
 
 router.get('/grade', async (req, res) => {
     try {
@@ -29,7 +31,7 @@ router.delete('/grade/:id', async ({ params }, res) => {
     }
 });
 
-router.get('/grade/:id', async ({ params }, res) => {
+router.get('/grade/student/:id', async ({ params }, res) => {
     try {
         const grade = await service.getById(params.id); 
         res.status(200).json(grade);

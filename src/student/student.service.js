@@ -3,16 +3,46 @@ const { create } = require('../helpers/helpers');
 const studentDTO = require('./student.dto');
 const studentModel = require('./student.model');
 const TeamModel = require('../team/team.model');
+const GradeModel = require('../grade/grade.model');
+const DisciplineModel = require('../disciplines/discipline.model');
 
 const createStudent = async (student) => {
     try {
-        const newstudent = new studentDTO(null, student.name, student.cpf, student.contact, null, student.status);
-        await create(studentModel.schema, newstudent, 'students'); 
-        return {content: student,status: 200};
+        const newStudent = new studentDTO(
+            null,
+            student.name,
+            student.cpf,
+            student.contact,
+            student.turma,
+            student.status,
+            []
+        );
+
+        const createdStudent = await create(studentModel.schema, newStudent, 'students');
+
+        // Retrieve the IDs of disciplines
+        const disciplinas = ['Matematica', 'Portugues', 'Ciencias', 'Geografia', 'Historia', 'Educação Física', 'Artes', 'Ingles'];
+        const disciplineIds = await Promise.all(disciplinas.map(async (disciplinaName) => {
+            const discipline = await DisciplineModel.findOne({ name: disciplinaName });
+            return discipline._id;
+        }));
+
+        // Create grades with valid references to disciplines
+        const createdGrades = disciplineIds.map(disciplineId => ({
+            discipline: disciplineId,
+            point: 0 
+        }));
+
+        createdStudent.grades = createdGrades;
+        await createdStudent.save();
+
+        return { content: createdStudent, status: 200 };
     } catch (error) {
-        return  { error: error.message,status: 500};
+        return { content: error.message, status: 500 };
     }
 };
+
+
 
 const getAllStudents = async () => {
     try {

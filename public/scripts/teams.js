@@ -236,6 +236,7 @@ $(document).ready(() => {
 
         }
     });
+    
     $('body').on('click', '#delete', (e) => {
         try {
             deleteTeam($(e.currentTarget).attr('val'))

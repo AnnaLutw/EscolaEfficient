@@ -3,7 +3,8 @@
         <h2>{{title}}</h2>
         <h5>Turma x</h5>
     </div>
-    <div class="col-3">
+    
+    {# <div class="col-3">
        <div class="mb-3 ">
 			<label class="form-label">Turmas</label>
 			<div class="row">
@@ -13,7 +14,7 @@
                 </div>
 				</div>
 			</div>
-    </div>
+    </div> #}
     <div class="col-3">
        <div class="mb-3 ">
 			<label class="form-label">Alunos</label>
@@ -25,7 +26,9 @@
 				</div>
 			</div>
     </div>
-
+<div class="col-3">
+        <button id="add_activity" type="button" class="btn default_outline_btn">+ Novo atividade</button>
+    </div>
 <div>
     <div class="model_header row text-center">
         <div class="col">Nome</div>
@@ -38,9 +41,9 @@
     <div id="all_grades"></div>
     <div id="model_grades" class="row text-center align-items-center model d-none">
         <div id="student" class="col">Ana Luiza De Sousa Silva</div>
-        <div id="math"class="col">100</div>
-        <div id="science"class="col">100</div>
-        <div id="pt"class="col">100</div>
+        <div id="Matematica"class="col"></div>
+        <div id="Ciencias"class="col"></div>
+        <div id="Portugues"class="col"></div>
         <div id="status"class="col">Aprovada</div>
         <div class="col">
             <div class="row">
@@ -64,17 +67,17 @@
                 <div class="col">Educação Física</div>
             </div>
             <div  class="row  text-center p-1 align-items-center mt-3">
-                <div  id="history"class="col">100</div>
-                <div id="geo"class="col">100</div>
-                <div id="art"class="col">100</div>
-                <div id="ingl"class="col">100</div>
-                <div id="fisics"class="col">100</div>
+                <div  id="Historia"class="col"></div>
+                <div id="Geografia"class="col"></div>
+                <div id="Artes"class="col"></div>
+                <div id="Ingles"class="col"></div>
+                <div id="Educação Física"class="col"></div>
             </div>
         </div>
     </div>
     
 </div>
-<div class="modal modal_grades" tabindex="-1">
+ <div class="modal modal_grades" tabindex="-1">
   <div class="modal-dialog  modal-xl">
     <div class="modal-content">
       <div class="modal-header">
@@ -100,6 +103,17 @@
               <li class="nav-item" role="presentation">
                 <button class="nav-link" id="arts-tab" data-bs-toggle="pill" data-bs-target="#arts" type="button" role="tab" aria-controls="pills-arts" aria-selected="false">Artes</button>
             </li>
+             <li class="nav-item" role="presentation">
+                <button class="nav-link" id="ef-tab" data-bs-toggle="pill" data-bs-target="#ef" type="button" role="tab" aria-controls="pills-ef" aria-selected="false">Educação Física</button>
+            </li>
+            <div class="mb-3 ">
+							<div class="row">
+                                <div class="col-8">
+                                    <input type="text" id="all_teams_input" class="searchInput" placeholder="Selecione uma turma">
+								    <div id="all_teams" class="options-list d-none"></div>
+                                </div>
+							</div>
+						</div>
         </ul>
        
       </div>
@@ -107,33 +121,10 @@
          <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="port" role="tabpanel" aria-labelledby="port-tab" tabindex="0">
                 {%include './models/activitys.twig'%}
+                
             </div>
             <div class="tab-pane fade" id="mathm" role="tabpanel" aria-labelledby="mathm-tab" tabindex="0">
-                   <div class="row">
-                {# <div class="col-6">
-                    <div class="row">
-                        <div class="mb-3 col-6">
-                            <label class="form-label">Nome atividade</label>
-                            <input id="cpf" class="form-control"  >
-                        </div>
-                        <div class="mb-3 col-6">
-                            <label class="form-label">Pontos</label>
-                            <input id="contact" class="form-control"  >
-                        </div>
-                    </div>
-                     
-                    <button id="new_activity" type="button" class="btn default_outline_btn">Nova atividade</button>
-
-                </div> #}
-                 <div class="col-6">
-                    <h5>Atividades</h5>
-                    <div id="all_activitys_math"></div>
-                    <div class="row d-none" id="model_activity_math ">
-                        <div class="col" id="name_math">Atividade 3</div>
-                        <div class="col"  id="point_math">5.0</div>
-                    </div>
-                </div>
-            </div>
+                   {%include './models/activitys.twig'%}
             </div>
             <div class="tab-pane fade" id="cienc" role="tabpanel" aria-labelledby="cienc-tab" tabindex="0">
                 {%include './models/activitys.twig'%}
@@ -150,13 +141,16 @@
             <div class="tab-pane fade" id="arts" role="tabpanel" aria-labelledby="arts-tab" tabindex="0">
                 {%include './models/activitys.twig'%}
             </div>
+            <div class="tab-pane fade" id="ef" role="tabpanel" aria-labelledby="ef-tab" tabindex="0">
+                {%include './models/activitys.twig'%}
+            </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" id="save" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
-</div>
+</div>  
 
