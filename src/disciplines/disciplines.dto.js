@@ -1,8 +1,9 @@
 class DisciplineDTO {
-    constructor(id, name, atividades) {
+    constructor(id, name, total, atividades) {
         this.id = id; 
         this.name = name;
-        this.atividades = atividades
+        this.atividades = atividades;
+        this.total = total;
     }
 }
 

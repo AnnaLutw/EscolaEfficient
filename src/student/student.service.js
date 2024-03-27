@@ -4,10 +4,33 @@ const studentDTO = require('./student.dto');
 const studentModel = require('./student.model');
 const TeamModel = require('../team/team.model');
 const GradeModel = require('../grade/grade.model');
+const GradeDTO = require('../grade/grade.dto');
 const DisciplineModel = require('../disciplines/discipline.model');
+const DisciplineDTO = require('../disciplines/disciplines.dto');
+
+const initializeDisciplines = async () => {
+    try {
+        const disciplinas = ['Matemática', 'Português', 'Ciências', 'Geografia', 'História', 'Educação Física', 'Artes', 'Inglês'];
+        for (const disciplina of disciplinas) {
+            const existingDiscipline = await DisciplineModel.findOne({ name: disciplina });
+            if (!existingDiscipline) {
+                const newDiscipline = new DisciplineModel({ 
+                    name: disciplina, 
+                    atividades: [], 
+                    total: 0 
+                });
+                await create(DisciplineModel.schema, newDiscipline, 'disciplines'); 
+            }
+        }
+    } catch (error) {
+        console.error('Erro ao inicializar as disciplinas:', error);
+    }
+};
 
 const createStudent = async (student) => {
     try {
+        await initializeDisciplines()
+
         const newStudent = new studentDTO(
             null,
             student.name,
@@ -15,33 +38,25 @@ const createStudent = async (student) => {
             student.contact,
             student.turma,
             student.status,
-            []
         );
 
-        const createdStudent = await create(studentModel.schema, newStudent, 'students');
+         const studentCreated = await create(studentModel.schema, newStudent, 'students');
 
-        // Retrieve the IDs of disciplines
-        const disciplinas = ['Matematica', 'Portugues', 'Ciencias', 'Geografia', 'Historia', 'Educação Física', 'Artes', 'Ingles'];
-        const disciplineIds = await Promise.all(disciplinas.map(async (disciplinaName) => {
-            const discipline = await DisciplineModel.findOne({ name: disciplinaName });
-            return discipline._id;
-        }));
+         const disciplineIds = (await DisciplineModel.find({}, '_id')).map(discipline => discipline._id);
 
-        // Create grades with valid references to disciplines
-        const createdGrades = disciplineIds.map(disciplineId => ({
-            discipline: disciplineId,
-            point: 0 
-        }));
+        const newGrade = new GradeModel({
+            student: studentCreated._id, 
+            disciplines: disciplineIds,
+        });
+            await create(GradeModel.schema, newGrade, 'grades');
 
-        createdStudent.grades = createdGrades;
-        await createdStudent.save();
+ 
 
-        return { content: createdStudent, status: 200 };
+        return { content: 'Estudante criado com sucesso', status: 200 };
     } catch (error) {
         return { content: error.message, status: 500 };
     }
 };
-
 
 
 const getAllStudents = async () => {

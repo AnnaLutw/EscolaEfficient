@@ -2,8 +2,6 @@ const listContent = (list, content) => {
     list.empty();
     content.forEach(item => {
         if(item.status != 0 ){
-            console.log(item.name)
-            console.log(item._id)
             const option = $('<option></option>');
             option.attr('id_value', item._id).text(item.name);
             list.append(option);

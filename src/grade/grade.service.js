@@ -5,30 +5,14 @@ const GradeModel = require('./grade.model');
 const ActivityModel = require('../activity/activity.model');
 const ActivityDTO = require('../activity/activity.dto');
 const StudentModel = require('../student/student.model');
+const DisciplineModel = require('../disciplines/discipline.model');
 
 
 const getAll = async () => {
     try {
-        const students = await StudentModel.find().populate('grades').exec();
+        const grades = await GradeModel.find().populate('student disciplines');
 
-        const updatedStudents = students.map(student => {
-            const updatedGrades = student.grades.map(grade => {
-                const total = grade.atividades.reduce((total, activity) => total + activity.point, 0);
-                return {
-                    id: grade._id,
-                    disciplina: grade.disciplina,
-                    total: total
-                };
-            });
-
-            return {
-                _id: student._id,
-                name: student.name,
-                grades: updatedGrades
-            };
-        });
-
-        return { content: updatedStudents, status: 200 };
+        return { content: grades, status: 200 };
     } catch (error) {
         return { error: error.message, status: 500 };
     }
@@ -53,29 +37,13 @@ const getById = async (id) => {
         if (!id) {
             throw new Error('ID not provided');
         }
-
-        let student = await StudentModel.findById(id).populate('grades').exec();
+        const grades = await GradeModel.findById(id).populate('student disciplines');
         
-        if (!student) {
+        if (!grades) {
             throw new Error('Student not found');
         }
 
-        const updatedGrades = student.grades.map(grade => {
-            const totalPoints = grade.atividades.reduce((total, activity) => total + activity.point, 0);
-            return {
-                _id: grade._id,
-                disciplina: grade.disciplina,
-                totalPoints: totalPoints
-            };
-        });
-
-        const updatedStudent = {
-            _id: student._id,
-            name: student.name,
-            grades: updatedGrades
-        };
-
-        return { status: 200, content: updatedStudent };
+        return { status: 200, content: grades };
     } catch (error) {
         return { status: 500, content: error.message };
     }
@@ -110,4 +78,53 @@ const change = async (id, body) => {
     }
 };
 
-module.exports = {  getAll, changeStatusById, getById, change };
+const createActivity = async (gradeId, activitiesByDiscipline) => {
+    try {
+        let grade = await GradeModel.findById(gradeId);
+
+        if (!grade) {
+            throw new Error('Grade not found');
+        }
+
+        for (const disciplineName in activitiesByDiscipline[0]) {
+            console.log(disciplineName)
+            const activities = activitiesByDiscipline[0][disciplineName]; 
+
+            const discipline = await DisciplineModel.findOne({ name: disciplineName });
+            if (!discipline) {
+                throw new Error(`Discipline '${disciplineName}' not found`);
+            }
+
+            if (!discipline.atividades) {
+                discipline.atividades = [];
+            }
+
+            for (const activity of activities) {
+            console.log(activity)
+                // Assuming ActivityDTO is a class or a constructor function
+                const newActivityDTO = new ActivityDTO(
+                    null,
+                    activity.name,
+                     activity.points,
+                    discipline.id,
+                     activity.team
+              );
+                
+                // Assuming create is a function to create the activity in the database
+                await create(ActivityModel.schema, newActivityDTO, 'activities');
+                discipline.atividades.push(newActivityDTO);
+            }
+        }
+
+        return { content: 'Atividades criadas com sucesso', status: 200 };
+    } catch (error) {
+        return { content: error.message, status: 500 };
+    }
+};
+
+
+
+
+
+
+module.exports = {  getAll, changeStatusById, getById, change, createActivity };
