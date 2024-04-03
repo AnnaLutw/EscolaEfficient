@@ -10,13 +10,17 @@ const DisciplineModel = require('../disciplines/discipline.model');
 
 const getAll = async () => {
     try {
-        const grades = await GradeModel.find().populate('student disciplines');
+        const grades = await GradeModel.find().populate({
+            path: 'disciplines',
+            populate: { path: 'discipline' } // Popule com a disciplina
+        }).populate('student');
 
         return { content: grades, status: 200 };
     } catch (error) {
         return { error: error.message, status: 500 };
     }
 };
+
 const changeStatusById = async (id) => {
     try {
         let grade = await GradeModel.findById(id);
@@ -37,7 +41,18 @@ const getById = async (id) => {
         if (!id) {
             throw new Error('ID not provided');
         }
-        const grades = await GradeModel.findById(id).populate('student disciplines');
+        const grades = await GradeModel.findById(id).populate({
+            path: 'disciplines',
+            populate: {
+                path: 'discipline', // Popule com a disciplina
+                populate: {
+                    path: 'atividades.atividade' // Popule com as atividades dentro de cada disciplina
+                }
+            }
+        }).populate('student');
+        
+        
+
         
         if (!grades) {
             throw new Error('Student not found');
@@ -78,16 +93,10 @@ const change = async (id, body) => {
     }
 };
 
-const createActivity = async (gradeId, activitiesByDiscipline) => {
+const createActivity = async ( activitiesByDiscipline) => {
     try {
-        let grade = await GradeModel.findById(gradeId);
-
-        if (!grade) {
-            throw new Error('Grade not found');
-        }
 
         for (const disciplineName in activitiesByDiscipline[0]) {
-            console.log(disciplineName)
             const activities = activitiesByDiscipline[0][disciplineName]; 
 
             const discipline = await DisciplineModel.findOne({ name: disciplineName });
@@ -100,20 +109,17 @@ const createActivity = async (gradeId, activitiesByDiscipline) => {
             }
 
             for (const activity of activities) {
-            console.log(activity)
-                // Assuming ActivityDTO is a class or a constructor function
-                const newActivityDTO = new ActivityDTO(
-                    null,
-                    activity.name,
-                     activity.points,
-                    discipline.id,
-                     activity.team
-              );
+            const newActivity = new ActivityModel({ 
+                name: activity.name,
+                points: activity.points,
+                team: activity.team
+            });
                 
-                // Assuming create is a function to create the activity in the database
-                await create(ActivityModel.schema, newActivityDTO, 'activities');
-                discipline.atividades.push(newActivityDTO);
+                const activityCreated = await create(ActivityModel.schema, newActivity, 'activities');
+                    console.log(discipline)
+                discipline.atividades.push({ atividade: activityCreated._id, point: 0 });
             }
+            await discipline.save();
         }
 
         return { content: 'Atividades criadas com sucesso', status: 200 };

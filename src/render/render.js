@@ -87,5 +87,15 @@ router.get('/notas', function(req, res){
         script:'../scripts/grades.js'
     });
 });
+router.get('/calendario', function(req, res){
+    sidebar = true
+    res.render('index.twig', {
+        template:"../views/calendar.twig",
+        sidebar,
+        style: '../styles/calendar.css',
+        title:'Calendario escolar',
+        script:'../scripts/calendar.js'
+    });
+});
 
 module.exports = router;

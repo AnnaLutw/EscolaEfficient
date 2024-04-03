@@ -1,5 +1,5 @@
  <div class="row">
-                <div class="col-6">
+                <div id="create" class="col-lg-6 col-12">
                     <div class="row">
                         <div class="mb-3 col-6">
                             <label class="form-label">Nome atividade</label>
@@ -15,12 +15,29 @@
                     <button id="new_activity" type="button" class="btn default_outline_btn">Nova atividade</button>
 
                 </div>
-                 <div class="col-6">
-                    <h5>Atividades</h5>
+               
+                 <div id="show_activities" class="col-lg-6 col-12">
+                 <div class="row">
+                    <h5 class="col-6">Atividade</h5>
+                    <h5 class="col-6">Nota</h5>
+                 </div>
+                    
                     <div id="all_activitys"></div>
-                    <div class="row d-none" id="model_activity">
+                    <div class="row d-none p-3" id="model_activity">
                         <div class="col" id="name">Atividade 3</div>
                         <div class="col"  id="point">5.0</div>
+                    </div>
+                </div>
+                  <div id="nota" class="col-lg-6 col-12">
+                     <div class="d-none row mb-3" id="student_name">
+                        <div class="col-3 fw-bold">Nota aluno:  </div>
+                        <div  class="col-9" id="name_student" ></div>
+                    </div>
+                    <div id="all_inputs"></div>
+                    <div class="row d-none" id="model_input">
+                        <div class="mb-3 col-6">
+                            <input id="name" class="form-control" placeholder="Digite aqui a nota do aluno" >
+                        </div>
                     </div>
                 </div>
             </div>

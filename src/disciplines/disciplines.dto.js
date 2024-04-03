@@ -3,7 +3,6 @@ class DisciplineDTO {
         this.id = id; 
         this.name = name;
         this.atividades = atividades;
-        this.total = total;
     }
 }
 

@@ -101,7 +101,9 @@ const findTabByNames = (name) => {
             case 'Artes':
                 return $('#artes');
             case 'Educação Física':
-                return $('#educacaof');
+                return $('#ingles');
+            case 'Ingles':
+                    return $('#educacaof');
             default:
                 return null;
         }
@@ -113,21 +115,26 @@ const findTabByNames = (name) => {
 const listSingleGrade = (content) => {
     try {
         $('.modal_grades').find('#save').attr('val', content._id);
-
+        $('.modal_grades').find('#name_student').text(content.student.name)
+        const ctx = '#all_inputs'
         content.disciplines.forEach(discipline => {
-            const subjectContainer = findTabByNames(discipline.name); 
+            const subjectContainer = findTabByNames(discipline.discipline.name); 
             if (subjectContainer) { 
                 const activitiesContainer = subjectContainer.find('#all_activitys');
                 activitiesContainer.empty(); 
 
                 const activityModel = subjectContainer.find('#model_activity').clone();
-                if (discipline.atividades) {
-                    discipline.atividades.forEach(activity => {
+                if (discipline.discipline.atividades) {
+                    discipline.discipline.atividades.forEach(activity => {
+                        console.log(activity)
                         const model = activityModel.clone();
-                        model.find('#name').text(activity.nome);
-                        model.find('#point').text(activity.point);
+                        const modelInput = $('#model_input').clone();
+                        model.find('#name').text(activity.atividade.name);
+                        model.find('#point').text(activity.atividade.point);
                         model.removeClass('d-none');
+                        modelInput.removeClass('d-none');
                         model.appendTo(activitiesContainer);
+                        modelInput.appendTo(ctx);
                     });
                 } else {
                     console.log('Erro: Nenhuma atividade encontrada para a disciplina:', discipline.name);
@@ -150,7 +157,7 @@ const listAllGrades = (content) => {
             $(model).find('#add_grade').attr('val',grade._id);
             $(model).find('#status').text('Aprovado').addClass('text-success');
             grade.disciplines.forEach(discipline => {
-                const subject = discipline.name;
+                const subject = discipline.discipline.name;
                 const totalPoints = discipline.total;
                 displaySubjectPoints(model, subject, totalPoints);
             });
@@ -197,7 +204,7 @@ const findTab = (name) => {
 
 const addActivity = async (id) => {
     try {
-        const { content, status } = request('POST', `grade/activity/${id}`, assigments);
+        const { content, status } = request('POST', `grade/activity`, assigments);
         status !== 200 ? messagesHandler.messageError(content) : messagesHandler.newMessage(content);
     } catch (error) {
         messagesHandler.messageError(error);
@@ -209,8 +216,11 @@ const addActivity = async (id) => {
 list('grade', listAllGrades)
 $(document).ready(() => {
 
-    $('body').on('click', '#edit', () => {
+    $('body').on('click', '#adc_activitys', async() => {
         try {
+            let content = await list('team', false);
+            fillOptionsList(content, $('#all_teams'), $('#all_teams_input'));
+
             $('.modal_grades').modal('show');
         } catch (error) {
             messagesHandler.messageError(error);
@@ -222,8 +232,10 @@ $(document).ready(() => {
             const id = $(e.currentTarget).attr('val');
             list(`grade/${id}`, listSingleGrade);
 
-            let content = await list('team', false);
-            fillOptionsList(content, $('#all_teams'), $('#all_teams_input'));
+          $('.modal_grades').find('#create').addClass('d-none')
+          $('.modal_grades').find('#section_turma').addClass('d-none')
+          $('.modal_grades').find('#nota').removeClass('d-none')
+          $('.modal_grades').find('#student_name').removeClass('d-none')
             $('.modal_grades').modal('show');
             $('.modal_grades').attr('id_aluno', id);
         } catch (error) {
@@ -243,6 +255,18 @@ $(document).ready(() => {
         try {
             const id = $(e.currentTarget).attr('val')
             addActivity(id);
+        } catch (error) {
+            messagesHandler.messageError(error)
+        }
+    });
+    $('.modal_grades').on('click', '#close', (e) => {
+        try {
+
+            $('.modal_grades').find('#create').removeClass('d-none')
+            $('.modal_grades').find('#nota').addClass('d-none')
+          $('.modal_grades').find('#section_turma').removeClass('d-none')
+          $('.modal_grades').find('#student_name').addClass('d-none')
+
         } catch (error) {
             messagesHandler.messageError(error)
         }

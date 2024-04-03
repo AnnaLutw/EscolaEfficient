@@ -1,157 +1,137 @@
 <div class="row p-2">
-    <div class="col-4">
-        <h2>{{title}}</h2>
-        <h5>Turma x</h5>
-    </div>
-    
-    {# <div class="col-3">
-       <div class="mb-3 ">
+  <div class="col-4">
+    <h2>{{title}}</h2>
+    <h5>Turma x</h5>
+  </div> {# 
+	<div class="col-3">
+		<div class="mb-3 ">
 			<label class="form-label">Turmas</label>
 			<div class="row">
-                <div class="col-8">
-                    <input type="text" id="all_teams_input" class="searchInput" placeholder="Pesquise uma turma">
-					<div id="all_teams" class="options-list d-none"></div>
-                </div>
+				<div class="col-8">
+					<input type="text" id="all_teams_input" class="searchInput" placeholder="Pesquise uma turma">
+						<div id="all_teams" class="options-list d-none"></div>
+					</div>
 				</div>
 			</div>
-    </div> #}
-    <div class="col-3">
-       <div class="mb-3 ">
-			<label class="form-label">Alunos</label>
-			<div class="row">
-                <div class="col-8">
-                    <input type="text" id="all_students_input" class="searchInput" placeholder="Pesquise um aluno">
-					<div id="all_students" class="options-list d-none"></div>
-                </div>
-				</div>
-			</div>
-    </div>
-<div class="col-3">
-        <button id="adc_activitys" type="button" class="btn default_outline_btn">+ Novo atividade</button>
-    </div>
-<div>
-    <div class="model_header row text-center">
-        <div class="col">Nome</div>
-        <div class="col">Matematica</div>
-        <div class="col">Ciências</div>
-        <div class="col">Portugês</div>
-        <div class="col">Status</div>
-        <div class="col">Ação</div>
-    </div>
-    <div id="all_grades"></div>
-    <div id="model_grades" class="row text-center align-items-center model d-none">
-        <div id="student" class="col">Ana Luiza De Sousa Silva</div>
-        <div id="mathm"class="col"></div>
-        <div id="cienc"class="col"></div>
-        <div id="port"class="col"></div>
-        <div id="status"class="col">Aprovada</div>
-        <div class="col">
-            <div class="row">
-                <button id="see_more" class="btn btn-primary col-3 default_btn">
-                    <i id="icon_eye" class="bi bi-eye-slash-fill"></i>
-                </button>
-                <div class="dropdown col-3" >
-                    <i class="bi bi-three-dots-vertical " data-bs-toggle="dropdown" aria-expanded="false"></i>
-                        <ul class="dropdown-menu">
-                            <li><a id="add_grade" class="dropdown-item" href="#">Editar notas</a></li>
-                        </ul>
-                </div>
-            </div>
+		</div> #} <div class="col-3">
+    <div class="mb-3 ">
+      <label class="form-label">Alunos</label>
+      <div class="row">
+        <div class="col-8">
+          <input type="text" id="all_students_input" class="searchInput" placeholder="Pesquise um aluno">
+          <div id="all_students" class="options-list d-none"></div>
         </div>
-        <div id="info_model" class=" d-none mt-3">
-            <div class=" row text-center model_header">
-                <div class="col">História</div>
-                <div class="col">Geografia</div>
-                <div class="col">Arte</div>
-                <div class="col">Inglês</div>
-                <div class="col">Educação Física</div>
-            </div>
-            <div  class="row  text-center p-1 align-items-center mt-3">
-                <div  id="his"class="col"></div>
-                <div id="geog"class="col"></div>
-                <div id="arts"class="col"></div>
-                <div id="Ingles"class="col"></div>
-                <div id="ingl"class="col"></div>
-            </div>
-        </div>
-    </div>
-    
-</div>
- <div class="modal modal_grades" tabindex="-1">
-  <div class="modal-dialog  modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-       <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="port-tab" data-bs-toggle="pill" data-bs-target="#portugues" type="button" role="tab" aria-controls="pills-port" aria-selected="true">Portugês</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="mathm-tab" data-bs-toggle="pill" data-bs-target="#matematica" type="button" role="tab" aria-controls="pills-mathm" aria-selected="false">Matematica</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="cienc-tab" data-bs-toggle="pill" data-bs-target="#ciencias" type="button" role="tab" aria-controls="pills-cienc" aria-selected="false">Ciencias</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="geog-tab" data-bs-toggle="pill" data-bs-target="#geografia" type="button" role="tab" aria-controls="pills-geog" aria-selected="false">Geografia</button>
-            </li>
-             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="his-tab" data-bs-toggle="pill" data-bs-target="#historia" type="button" role="tab" aria-controls="pills-his" aria-selected="false">Historia</button>
-            </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="ing-tab" data-bs-toggle="pill" data-bs-target="#ingles" type="button" role="tab" aria-controls="pills-ing" aria-selected="false">Inglês</button>
-            </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="arts-tab" data-bs-toggle="pill" data-bs-target="#artes" type="button" role="tab" aria-controls="pills-arts" aria-selected="false">Artes</button>
-            </li>
-             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="ef-tab" data-bs-toggle="pill" data-bs-target="#edcacaof" type="button" role="tab" aria-controls="pills-ef" aria-selected="false">Educação Física</button>
-            </li>
-            <div class="mb-3 ">
-							<div class="row">
-                                <div class="col-8">
-                                    <input type="text" id="all_teams_input" class="searchInput" placeholder="Selecione uma turma">
-								    <div id="all_teams" class="options-list d-none"></div>
-                                </div>
-							</div>
-						</div>
-        </ul>
-       
-      </div>
-      <div class="modal-body texe-black">
-         <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="portugues" role="tabpanel" aria-labelledby="port-tab" tabindex="0">
-                {%include './models/activitys.twig'%}
-                
-            </div>
-            <div class="tab-pane fade" id="matematica" role="tabpanel" aria-labelledby="mathm-tab" tabindex="0">
-                   {%include './models/activitys.twig'%}
-            </div>
-            <div class="tab-pane fade" id="ciencias" role="tabpanel" aria-labelledby="cienc-tab" tabindex="0">
-                {%include './models/activitys.twig'%}
-            </div>
-            <div class="tab-pane fade" id="geografia" role="tabpanel" aria-labelledby="geog-tab" tabindex="0">
-                {%include './models/activitys.twig'%}
-            </div>
-            <div class="tab-pane fade" id="historia" role="tabpanel" aria-labelledby="his-tab" tabindex="0">
-                {%include './models/activitys.twig'%}
-            </div>
-            <div class="tab-pane fade" id="ingles" role="tabpanel" aria-labelledby="ing-tab" tabindex="0">
-                {%include './models/activitys.twig'%}
-            </div>
-            <div class="tab-pane fade" id="arartests" role="tabpanel" aria-labelledby="arts-tab" tabindex="0">
-                {%include './models/activitys.twig'%}
-            </div>
-            <div class="tab-pane fade" id="educacaof" role="tabpanel" aria-labelledby="ef-tab" tabindex="0">
-                {%include './models/activitys.twig'%}
-            </div>
-           
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" id="save" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
-</div>  
-
+  <div class="col-3">
+    <button id="adc_activitys" type="button" class="btn default_outline_btn">+ Novo atividade</button>
+  </div>
+  <div>
+    <div class="model_header row text-center">
+      <div class="col">Nome</div>
+      <div class="col">Matematica</div>
+      <div class="col">Ciências</div>
+      <div class="col">Portugês</div>
+      <div class="col">Status</div>
+      <div class="col">Ação</div>
+    </div>
+    <div id="all_grades"></div>
+    <div id="model_grades" class="row text-center align-items-center model d-none">
+      <div id="student" class="col">Ana Luiza De Sousa Silva</div>
+      <div id="mathm" class="col"></div>
+      <div id="cienc" class="col"></div>
+      <div id="port" class="col"></div>
+      <div id="status" class="col">Aprovada</div>
+      <div class="col">
+        <div class="row">
+          <button id="see_more" class="btn btn-primary col-3 default_btn">
+            <i id="icon_eye" class="bi bi-eye-slash-fill"></i>
+          </button>
+          <div class="dropdown col-3">
+            <i class="bi bi-three-dots-vertical " data-bs-toggle="dropdown" aria-expanded="false"></i>
+            <ul class="dropdown-menu">
+              <li>
+                <a id="add_grade" class="dropdown-item" href="#">Editar notas</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="info_model" class=" d-none mt-3">
+        <div class=" row text-center model_header">
+          <div class="col">História</div>
+          <div class="col">Geografia</div>
+          <div class="col">Arte</div>
+          <div class="col">Inglês</div>
+          <div class="col">Educação Física</div>
+        </div>
+        <div class="row  text-center p-1 align-items-center mt-3">
+          <div id="his" class="col"></div>
+          <div id="geog" class="col"></div>
+          <div id="arts" class="col"></div>
+          <div id="Ingles" class="col"></div>
+          <div id="ingl" class="col"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal modal_grades" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog  modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <ul class="nav nav-pills mb-3 align-items-center" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="port-tab" data-bs-toggle="pill" data-bs-target="#portugues" type="button" role="tab" aria-controls="pills-port" aria-selected="true">Portugês</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="mathm-tab" data-bs-toggle="pill" data-bs-target="#matematica" type="button" role="tab" aria-controls="pills-mathm" aria-selected="false">Matematica</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="cienc-tab" data-bs-toggle="pill" data-bs-target="#ciencias" type="button" role="tab" aria-controls="pills-cienc" aria-selected="false">Ciencias</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="geog-tab" data-bs-toggle="pill" data-bs-target="#geografia" type="button" role="tab" aria-controls="pills-geog" aria-selected="false">Geografia</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="his-tab" data-bs-toggle="pill" data-bs-target="#historia" type="button" role="tab" aria-controls="pills-his" aria-selected="false">Historia</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="ing-tab" data-bs-toggle="pill" data-bs-target="#ingles" type="button" role="tab" aria-controls="pills-ing" aria-selected="false">Inglês</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="arts-tab" data-bs-toggle="pill" data-bs-target="#artes" type="button" role="tab" aria-controls="pills-arts" aria-selected="false">Artes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="ef-tab" data-bs-toggle="pill" data-bs-target="#edcacaof" type="button" role="tab" aria-controls="pills-ef" aria-selected="false">Educação Física</button>
+            </li>
+            <div>
+              <div class="row"  id="section_turma">
+                <div class="col-8">
+                  <input type="text" id="all_teams_input" class="searchInput" placeholder="Selecione uma turma">
+                  <div id="all_teams" class="options-list d-none"></div>
+                </div>
+              </div>
+            
+            </div>
+          </ul>
+        </div>
+        <div class="modal-body texe-black">
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="portugues" role="tabpanel" aria-labelledby="port-tab" tabindex="0"> {%include './models/activitys.twig'%} </div>
+            <div class="tab-pane fade" id="matematica" role="tabpanel" aria-labelledby="mathm-tab" tabindex="0"> {%include './models/activitys.twig'%} </div>
+            <div class="tab-pane fade" id="ciencias" role="tabpanel" aria-labelledby="cienc-tab" tabindex="0"> {%include './models/activitys.twig'%} </div>
+            <div class="tab-pane fade" id="geografia" role="tabpanel" aria-labelledby="geog-tab" tabindex="0"> {%include './models/activitys.twig'%} </div>
+            <div class="tab-pane fade" id="historia" role="tabpanel" aria-labelledby="his-tab" tabindex="0"> {%include './models/activitys.twig'%} </div>
+            <div class="tab-pane fade" id="ingles" role="tabpanel" aria-labelledby="ing-tab" tabindex="0"> {%include './models/activitys.twig'%} </div>
+            <div class="tab-pane fade" id="artes" role="tabpanel" aria-labelledby="arts-tab" tabindex="0"> {%include './models/activitys.twig'%} </div>
+            <div class="tab-pane fade" id="educacaof" role="tabpanel" aria-labelledby="ef-tab" tabindex="0"> {%include './models/activitys.twig'%} </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="save" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -17,7 +17,6 @@ const initializeDisciplines = async () => {
                 const newDiscipline = new DisciplineModel({ 
                     name: disciplina, 
                     atividades: [], 
-                    total: 0 
                 });
                 await create(DisciplineModel.schema, newDiscipline, 'disciplines'); 
             }
@@ -44,9 +43,15 @@ const createStudent = async (student) => {
 
          const disciplineIds = (await DisciplineModel.find({}, '_id')).map(discipline => discipline._id);
 
+         const gradeEntries = disciplineIds.map(disciplineId => ({
+            discipline: disciplineId, 
+            total: 0
+        }));
+
+
         const newGrade = new GradeModel({
             student: studentCreated._id, 
-            disciplines: disciplineIds,
+            disciplines: gradeEntries
         });
             await create(GradeModel.schema, newGrade, 'grades');
 

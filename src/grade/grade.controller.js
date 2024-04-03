@@ -21,9 +21,9 @@ router.get('/grade', async (req, res) => {
         res.status(500).json({ error: error.message }); 
     }
 });
-router.post(`/grade/activity/:id`, async ({ body , params}, res) => {
+router.post(`/grade/activity`, async ({ body }, res) => {
     try {
-        const createdActivity = await service.createActivity(params.id, body);
+        const createdActivity = await service.createActivity( body);
         res.status(200).json(createdActivity);
     } catch (error) {
         res.status(500).json({ error: error.message });
