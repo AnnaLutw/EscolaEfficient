@@ -17,7 +17,7 @@ const getAll = async () => {
 const createEvent = async (calendar) => {
     try {
         console.log(calendar)
-        const calendars = new CalendarDTO(null, calendar.event, calendar.date);
+        const calendars = new CalendarDTO(null, calendar.event, calendar.start, calendar.end);
         await create(CalendarModel.schema, calendars, 'calendars'); 
         return {content: 'created',status: 200};
 

@@ -1,8 +1,9 @@
 class CalendarDTO {
-    constructor(id, event , date) {
+    constructor(id, event , start, end) {
         this.id = id; 
         this.event = event;
-        this.date = date
+        this.start = start;
+        this.end = end;
     }
 }
 

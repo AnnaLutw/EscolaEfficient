@@ -1,6 +1,25 @@
 #calendar {
     max-width: 95%;
     margin: 0 auto;
-    height: 90%;
+    height: 88%;
 
   }
+  a {
+    color: black;
+}
+.fc .fc-scrollgrid-section-header > * {
+    border-bottom-width: 0px;
+    background-color: var(--first-color);
+}
+.fc .fc-multimonth-title {
+    background-color: var(--first-color);
+}
+.fc-daygrid-event-dot {
+  border: calc(var(--fc-daygrid-event-dot-width) / 2) solid var(--first-color);
+}
+/* .fc-direction-ltr .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+  background-color: var(--first-color);
+}
+.fc-daygrid-event.fc-event-end {
+  background-color: blue;
+} */

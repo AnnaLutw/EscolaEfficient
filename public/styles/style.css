@@ -35,7 +35,6 @@ body{
     
 }
 
-
 .searchInput {
     padding: 8px;
     border: 1px solid #ccc;
@@ -64,3 +63,4 @@ body{
 .offcanvas{
     width: 700px !important;
 }
+

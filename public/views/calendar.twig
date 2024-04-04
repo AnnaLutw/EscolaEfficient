@@ -1,5 +1,7 @@
+
   <div id='calendar'></div>
 
+  
 <div class="modal modal_calendar" tabindex="-1" data-bs-backdrop="static">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -8,8 +10,18 @@
         </div>
         <div class="modal-body texe-black">
               <div class="mb-3 col-12">
-                <label class="form-label">Nome</label>
-                <input id="event" class="form-control"  >
+                <label class="form-label">Evento</label>
+                <input id="event" class="form-control" placeholder="Digite o nome do evento">
+                </div>
+               <div class="mb-3 col-12">
+                <label class="form-label">Horario do evento</label>
+                <input id="hour" type="text" class="form-control" placeholder="Digite o horario do evento">
+                <span id="hour-error" class="text-danger" style="display: none;">Hora inválida. Por favor, insira uma hora no formato HH:mm.</span>
+            </div>
+
+                 <div class="mb-3 col-12">
+                  <label class="form-label">Data final</label>
+                  <input id="end" type="date" class="form-control"  placeholder="Digite a data final">
                 </div>
         <div class="modal-footer">
           <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

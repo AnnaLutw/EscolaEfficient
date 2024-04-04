@@ -97,5 +97,14 @@ router.get('/calendario', function(req, res){
         script:'../scripts/calendar.js'
     });
 });
-
+router.get('/registrar', function(req, res){
+    sidebar = false
+    res.render('index.twig', {
+        template:"../views/register.twig",
+        sidebar,
+        style: '../styles/register.css',
+        title:'Calendario escolar',
+        script:'../scripts/register.js'
+    });
+});
 module.exports = router;
