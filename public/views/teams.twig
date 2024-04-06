@@ -2,10 +2,11 @@
 	<div class="col-11">
 		<h2>{{title}}</h2>
 	</div>
-	<div class="col-1">
-		<button id="add_team" type="button" class="btn default_outline_btn">+ Novo</button>
-	</div>
-
+	{% if type == 'user' %}
+		<div class="col-1">
+			<button id="add_team" type="button" class="btn default_outline_btn">+ Novo</button>
+		</div>
+ 	{% endif %}
 </div>
 
 <div>
@@ -29,12 +30,14 @@
 				<li>
 					<a id="see_students" class="dropdown-item" href="#">Ver alunos</a>
 				</li>
-				<li>
-					<a id="edit" class="dropdown-item" href="#">Editar</a>
-				</li>
-				<li>
-					<a id="delete" class="dropdown-item" href="#">Desativar</a>
-				</li>
+				{% if type == 'user' %}
+					<li>
+						<a id="edit" class="dropdown-item" href="#">Editar</a>
+					</li>
+					<li>
+						<a id="delete" class="dropdown-item" href="#">Desativar</a>
+					</li>
+				{% endif %}
 			</ul>
 		</div>
 	</div>

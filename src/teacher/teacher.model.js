@@ -6,6 +6,8 @@ const teacherSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     turmas: [{ type: String, }],
     status: { type: Number, default: 1 }, 
+    picture: { type: String },
+    passwordHash: { type: String,required: true, unique: true }, 
 }, { timestamps: true }); 
 
 const Teacher = mongoose.model('Teacher', teacherSchema);

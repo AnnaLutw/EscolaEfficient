@@ -5,8 +5,9 @@ const teacherValues = ()=>{
         const name = $(ctx).find('#name').val()
         const cpf = $(ctx).find('#cpf').val()
         const email = $(ctx).find('#email').val()
+        const password = $(ctx).find('#password').val()
         formatedCpf = maskOut(cpf)
-        return {name,cpf:formatedCpf,email}
+        return {name,cpf:formatedCpf,email , password}
     }catch(error){
         messagesHandler.messageError(error)
     } 
@@ -17,8 +18,7 @@ const save = async(id)=>{
         const method = id ? 'PUT': 'POST'
         const body = teacherValues()
         const {status, content} = id ? await request(method, `teacher/${id}`, body) : await request(method, `teacher`, body)
-        console.log(status)
-        status !== 200 ? messagesHandler.messageError(content)  : messagesHandler.newMessage(content)
+        status !== 200 ? messagesHandler.messageError(content)  : messagesHandler.newMessage(content, true)
         closeModal('.modal_teacher')
         await list('teacher', listAllTeachers)
     }catch(error){

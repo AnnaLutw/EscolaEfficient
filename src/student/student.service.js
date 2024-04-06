@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { create } = require('../helpers/helpers');
+const { create, createHash } = require('../helpers/helpers');
 const studentDTO = require('./student.dto');
 const studentModel = require('./student.model');
 const TeamModel = require('../team/team.model');
@@ -29,6 +29,7 @@ const initializeDisciplines = async () => {
 const createStudent = async (student) => {
     try {
         await initializeDisciplines()
+        const passwordHash = await createHash(student.password)
 
         const newStudent = new studentDTO(
             null,
@@ -37,6 +38,7 @@ const createStudent = async (student) => {
             student.contact,
             student.turma,
             student.status,
+            passwordHash
         );
 
          const studentCreated = await create(studentModel.schema, newStudent, 'students');

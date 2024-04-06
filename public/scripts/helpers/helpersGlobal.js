@@ -67,7 +67,7 @@ const maskOut = (val)=>{
     try{
         return val.replace(/\D/g, '');;
     }catch(error){
-        throw messagesHandler.messageError(error);
+        throw (messagesHandler.messageError(error));
     }
 }
 const closeModal = (ctx)=>{
@@ -77,10 +77,22 @@ const closeModal = (ctx)=>{
         $(ctx).find('#save').deleteAttr('val')
         $(ctx).find('input').val('');
     }catch(error){
-        throw messagesHandler.messageError(error);
+        throw (messagesHandler.messageError(error));
+    
     }
 }
-
+const listUser = (content)=>{
+    try{
+        const ctx = '.user_section'
+        $('#user_name').text(content.name)
+        $(ctx).find('#email').val(content.email)
+        $(ctx).find('#save').attr('val' , content._id)
+        $(ctx).find('#view_picture').attr('src' , content.picture)
+        $('.header').find('#view_picture').attr('src' , content.picture)
+    }catch(error){
+        throw (messagesHandler.messageError(error));
+    }
+}
 
 const formatCpf = (val) => {
     try {

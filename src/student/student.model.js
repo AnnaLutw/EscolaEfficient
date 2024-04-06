@@ -6,6 +6,8 @@ const studentSchema = new mongoose.Schema({
     contact: { type: String, required: true },
     turma: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
     status: { type: Number, default: 1 },
+    picture: { type: String },
+    passwordHash: { type: String,required: true, unique: true }, 
   
 }, { timestamps: true }); 
 

@@ -1,9 +1,28 @@
+const updateUser = async(id)=>{
+    try{
+        const picture = $('#view_picture').attr('src')
+
+        const {content, status} = await request('PUT', `user`, {picture})
+
+        if(status != 200){
+            messagesHandler.messageError(content, true);
+            return
+        }
+        messagesHandler.newMessage(content, true);
+        list('user', listUser)
+
+
+    }catch(error){
+        messagesHandler.messageError(error);
+    }
+}
+
 $(document).ready(() => {
     $('body').on('click', '#btn_file', () => {
         try {
             $('#picture').click()
         } catch (error) {
-            console.log(error);
+            messagesHandler.messageError(error);
         }
     });
     var cropper;
@@ -51,4 +70,12 @@ $(document).ready(() => {
         cropper = null; 
     });
     
+    $('#save').on('click', async(e)=> {
+        try{
+            const id = $(e.currentTarget).attr('id')
+            await updateUser()
+        }catch(error){
+            messagesHandler.messageError(error);
+        }
+    });
 });

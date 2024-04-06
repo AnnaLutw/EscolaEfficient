@@ -3,21 +3,36 @@
     <i class='bx bx-menu' id="header-toggle"></i>
   </div>
 
-
+ {% if type != 'user' %}
   <a href="/minha-conta" class="col-2" href="minha-conta">
     <div class="row align-items-center">
+    
       <div class="header_img col-1">
-          <img src="https://i.imgur.com/hczKIze.jpg" alt="">
-          
+          <img id="view_picture" src="https://i.imgur.com/hczKIze.jpg" alt="">
+         
       </div>
-      <div class="user_name col">
+      <div id="user_name" class="user_name col">
+          Ana Luiza
+      </div>
+    </div>
+    
+  </a>
+ {% endif %}  
+ {% if type == 'user' %}
+ <div href="/minha-conta" class="col-2" href="minha-conta">
+    <div class="row align-items-center">
+    
+      <div class="header_img col-1">
+        <i class="fs-3  bi-people"></i>
+         
+      </div>
+      <div id="user_name" class="user_name col">
           Ana Luiza
       </div>
     </div>
       
-  </a>
-    
- 
+  </div>
+  {% endif %}
 
 </header>
 
@@ -34,10 +49,12 @@
           <i class="bi bi-layout-text-sidebar-reverse nav_icon"></i>
           <span class="nav_name">Novidades</span>
         </a>
-        <a href="/professores" class="nav_link">
-          <i class="bi bi-person-lines-fill nav_icon"></i>
-          <span class="nav_name">Professores</span>
-        </a>
+         {% if type == 'user' %}
+          <a href="/professores" class="nav_link">
+            <i class="bi bi-person-lines-fill nav_icon"></i>
+            <span class="nav_name">Professores</span>
+          </a>
+         {% endif %}
         <a href="/turmas" class="nav_link">
          <i class="bi bi-mortarboard-fill nav_icon"></i>
             <span class="nav_name">Turmas</span>
@@ -46,10 +63,12 @@
             <i class="bi bi-pencil-fill nav_icon"></i>
             <span class="nav_name">Notas</span>
         </a>
-        <a href="/alunos" class="nav_link">
-          <i class="bi bi-people nav_icon"></i>
-          <span class="nav_name">Alunos</span>
-        </a>
+         {% if type == 'user' %}
+          <a href="/alunos" class="nav_link">
+            <i class="bi bi-people nav_icon"></i>
+            <span class="nav_name">Alunos</span>
+          </a>
+         {% endif %}
         <a href="#" class="nav_link">
         <i class="bi bi-book-fill nav_icon"></i>
           <span class="nav_name">Livros</span>

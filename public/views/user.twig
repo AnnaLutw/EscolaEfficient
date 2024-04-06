@@ -1,9 +1,11 @@
-    <div class="row height-100 ">
+    <div class="row height-100 user_section">
         <div class="col-6  ">
             <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input  class="form-control"  disabled>
-            </div>
+             {% if type != 'teacher' %}
+                    <label class="form-label">Email</label>
+                    <input id="email" class="form-control"  disabled>
+            {% endif %}
+                </div>
             <div class="mb-3">
                 <label class="form-label">Senha Atual</label>
                 <input  class="form-control" placeholder="Digite sua senha atual">
@@ -18,7 +20,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <button class="btn btn-primary btn-block">Salvar</button>
+                    <button id="save" class="btn btn-primary btn-block">Salvar</button>
                 </div>
             </div>
         </div>

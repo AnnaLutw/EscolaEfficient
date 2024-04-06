@@ -1,16 +1,19 @@
 const express = require('express')
-
 const router = express.Router()
-
 const path = require('path')
-
+const cookieParser = require('cookie-parser');
+router.use(cookieParser());
 let sidebar = true
+const { getUserByCookie } = require('../helpers/helpers');
 
 router.get('/', function(req, res){
+    const type = getUserByCookie(req)
+    console.log(type)
     res.render('index.twig', {
         message : "Hello World",
         template:"../views/inicio.twig",
-       sidebar
+       sidebar,
+       type
     });
 });
 
@@ -46,15 +49,25 @@ router.get('/turmas', function(req, res){
         script:'../scripts/teams.js'
     });
 });
-router.get('/novidades', function(req, res){
-    sidebar = true
-    res.render('index.twig', {
-        template:"../views/news.twig",
-        sidebar,
-        style: '../styles/news.css',
-        title:'Novidades',
-        script:'../scripts/news.js'
-    });
+router.get('/novidades', async function(req, res){
+    try{
+        const {userType} = await getUserByCookie(req);
+        const type = userType
+        console.log(type)
+        sidebar = true
+        res.render('index.twig', {
+            template:"../views/news.twig",
+            sidebar,
+            style: '../styles/news.css',
+            title:'Novidades',
+            script:'../scripts/news.js',
+            type
+        });
+    }catch(error){
+        console.error(error);
+        res.status(500).send('Erro ao obter o tipo de usuário');
+    }
+  
 });
 router.get('/minha-conta', function(req, res){
     sidebar = true

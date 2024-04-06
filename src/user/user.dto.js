@@ -1,12 +1,12 @@
-class StudentDTO {
-    constructor(id, name, cpf, contact, turma, status) {
+class UserDTO {
+    constructor(id, name, cpf, status, passwordHash) {
         this.id = id; 
         this.name = name;
         this.cpf = cpf;
-        this.contact = contact;
         this.status = status;
-     
+        this.passwordHash = passwordHash;
     }
+    
 }
 
-module.exports = StudentDTO;
+module.exports = UserDTO;

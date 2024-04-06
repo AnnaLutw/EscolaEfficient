@@ -5,8 +5,9 @@ const studentValues = ()=>{
         const name = $(ctx).find('#name').val()
         const cpf = $(ctx).find('#cpf').val()
         const contact = $(ctx).find('#contact').val()
+        const password = $(ctx).find('#password').val()
         formatedCpf = maskOut(cpf)
-        return {name,cpf:formatedCpf,contact}
+        return {name,cpf:formatedCpf,contact, password}
     }catch(error){
         messagesHandler.messageError(error)
     } 
