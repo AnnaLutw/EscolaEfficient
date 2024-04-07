@@ -28,12 +28,14 @@ app.use('/api', (req, res, next) => {
     const gradeController = require('./src/grade/grade.controller.js');
     const calendarController = require('./src/calendar/calendar.controller.js');
     const UserController = require('./src/user/user.controller.js');
+    const NewsController = require('./src/news/news.controller.js');
     app.use('/api', teacherController);
     app.use('/api', studentController);
     app.use('/api', teamsController);
     app.use('/api', gradeController);
     app.use('/api', calendarController);
     app.use('/api', UserController);
+    app.use('/api', NewsController);
     next();
 });
 

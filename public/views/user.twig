@@ -1,35 +1,36 @@
     <div class="row height-100 user_section">
-        <div class="col-6  ">
-            <div class="mb-3">
-             {% if type != 'teacher' %}
-                    <label class="form-label">Email</label>
-                    <input id="email" class="form-control"  disabled>
-            {% endif %}
-                </div>
-            <div class="mb-3">
-                <label class="form-label">Senha Atual</label>
-                <input  class="form-control" placeholder="Digite sua senha atual">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Nova senha</label>
-                <input  class="form-control" placeholder="Digite a nova senha " >
-            </div>
-             <div class="mb-3">
-                <label class="form-label">Nova senha novamente</label>
-                <input  class="form-control"   placeholder="Digite a nova senha novamente">
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <button id="save" class="btn btn-primary btn-block">Salvar</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-6  text-center picture_bloco">
+        
+        <div class="col-lg-6 col-12  text-center picture_bloco">
             <label class="form-label">Foto</label>
             <div class="text-center row flex-column align-items-center mt-2">
                 <img  id="view_picture"  src="https://i.imgur.com/hczKIze.jpg" class="rounded-circle img_user " alt="Foto do usuário" width="150">
                 <button id="btn_file" class="btn default_outline_btn col-5 mt-4"><input type="file" class="form-control" id="picture" hidden>Trocar imagem</button>
              
+            </div>
+        </div>
+        <div class="col-lg-6 col-12 ">
+            <div class="mb-3 col-md-6">
+             {% if type != 'teacher' %}
+                    <label class="form-label">Email</label>
+                    <input id="email" class="form-control"  disabled>
+            {% endif %}
+                </div>
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Senha Atual</label>
+                <input  class="form-control" placeholder="Digite sua senha atual">
+            </div>
+            <div class="mb-3 col-md-6">
+                <label class="form-label">Nova senha</label>
+                <input  class="form-control" placeholder="Digite a nova senha " >
+            </div>
+             <div class="mb-3 col-md-6">
+                <label class="form-label">Nova senha novamente</label>
+                <input  class="form-control"   placeholder="Digite a nova senha novamente">
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-12">
+                    <button id="save" class="btn btn-primary btn-block">Salvar</button>
+                </div>
             </div>
         </div>
     </div>

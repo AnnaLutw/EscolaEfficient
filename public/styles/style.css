@@ -63,4 +63,13 @@ body{
 .offcanvas{
     width: 700px !important;
 }
-
+.section{
+    overflow-y: auto;
+    height: 92vh !important;
+    overflow-x: hidden;
+}
+@media (max-width: 600px) {
+    body{
+        overflow: auto;
+    }
+  }
