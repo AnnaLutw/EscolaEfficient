@@ -29,7 +29,6 @@ $(document).ready(() => {
     $('#picture').on('click', function(e){
         e.stopPropagation();
     
-       // rest of the code goes here
     })
     $('#picture').on('change', function(event) {
         var files = event.target.files;

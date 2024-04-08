@@ -23,3 +23,28 @@
        
     </section>
 </div>
+
+<div  class="offcanvas offcanvas-end modal_news" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Novidades</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+     <div class="mb-3">
+            <label class="form-label">Titulo</label>
+            <input id="title"  class="form-control"  >
+        </div>
+        <div class="mb-3">
+           <label class="form-label">Descrição</label>
+            <input id="description" class="form-control"  >
+        </div>
+        <div class="mb-3">
+             <button id="btn_file" class="btn default_outline_btn col-5 mt-4">
+                <input type="file" class="form-control" id="foto" hidden />Selecione imagem aqui
+             </button>
+        </div>
+        <img id="picture"> </img>
+        <button id="save" class="btn default_btn">Salvar</button>
+  </div>
+</div>
+
