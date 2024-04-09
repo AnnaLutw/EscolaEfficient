@@ -7,9 +7,7 @@ const TeamModel = require('../team/team.model');
 const createTeacher = async (teacher) => {
     try {
         const passwordHash = await createHash(teacher.password)
-        console.log(passwordHash)
-
-        const newTeacher = new TeacherDTO(null, teacher.name, teacher.cpf, teacher.email, [], teacher.status,passwordHash);
+        const newTeacher = new TeacherDTO(null, teacher.name, teacher.cpf, teacher.email, [], teacher.status, '',passwordHash);
         await create(TeacherModel.schema, newTeacher, 'teachers'); 
         return {content: teacher,status: 200};
     } catch (error) {

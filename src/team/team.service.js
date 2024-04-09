@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
-const { create } = require('../helpers/helpers');
+const { create, getUser } = require('../helpers/helpers');
 const TeamDTO = require('./team.dto');
 const TeamModel = require('./team.model');
 const StudentModel = require('../student/student.model');
+const MessageModel = require('../message/message.model');
+const MessageDTO = require('../message/message.dto');
 
 const createTeam = async (team) => {
     try {
@@ -28,11 +30,27 @@ const createTeam = async (team) => {
 };
 
 
-
-
-const getAll = async () => {
+const getAll = async (headers) => {
     try {
-        const teams = await TeamModel.find().populate('students', 'id name').populate('teacher', 'id name');
+        const userResponse = await getUser(headers); 
+        if (userResponse.error) {
+            return userResponse; 
+        }
+        const user = userResponse.content;
+        let teams
+        if(user.type == 'user'){
+             teams = await TeamModel.find().populate('students', 'id name').populate('teacher', 'id name');
+        }else if(user.type == 'teacher'){
+             teams = await TeamModel.find({ teacher: user._id })
+            .populate('students', 'id name')
+            .populate('teacher', 'id name');
+        }else{
+            teams = await TeamModel.find({ students: user._id })
+            .populate('students', 'id name')
+            .populate('teacher', 'id name');
+        }
+       
+        
         return { content: teams, status: 200 };
     } catch (error) {
         return { error: error.message, status: 500 };
@@ -63,7 +81,14 @@ const getById = async (id) => {
         return { status: 500, content: error.message };
     }
 };
-
+const getStudentsById = async (id) => {
+    try {
+        let team = await TeamModel.findById(id).populate('students', 'name')
+        return { status: 200, content: team };
+    } catch (error) {
+        return { status: 500, content: error.message };
+    }
+};
 
 const change = async (id, body) => {
     try {
@@ -128,5 +153,46 @@ const deleteStudent = async (studentId) => {
     }
 };
 
+const createMessage = async (message, headers) => {
+    try {
+        const userResponse = await getUser(headers); 
+        if (userResponse.error) {
+            return userResponse; 
+        } 
+        const user = userResponse.content;
+        const newMessage = new MessageDTO(null, user._id, message.text, message.team);
+        await create(MessageModel.schema, newMessage, 'message');
+        return { status: 200, content: 'created' };
+    } catch (error) {
+        return { status: 500, content: error.message };
+    }
+};
 
-module.exports = { createTeam, getAll, changeStatusById, getById, change, deleteStudent };
+const getMessagesByTeam = async (teamId, headers) => {
+    try {
+        const userResponse = await getUser(headers);
+        if (userResponse.error) {
+            return userResponse;
+        }
+        const user = userResponse.content;
+
+        let team = await TeamModel.findById(teamId.id);
+
+        const myMessages = await MessageModel.find({ user: user._id, team: teamId.id }).populate('user');
+        const otherMessages = await MessageModel.find({ user: { $ne: user._id }, team: teamId.id }).populate('user');
+
+        return { status: 200, content: {team, myMessages, otherMessages } };
+    } catch (error) {
+        return { status: 500, content: error.message };
+    }
+};
+
+module.exports = { createTeam,
+     getAll, 
+     changeStatusById, 
+     getById, 
+     change,
+     deleteStudent, 
+     createMessage, 
+     getMessagesByTeam,
+     getStudentsById };

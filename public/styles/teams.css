@@ -6,3 +6,38 @@
     padding: 7px;
     border-bottom: solid 1px #DCDCDC;
 }
+
+#message_block{
+    background-color: #ffcdad;
+
+}
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    overflow-x: hidden;
+}
+#btn_send_message{
+    cursor: pointer;
+}
+#all_messages{
+    overflow-y: auto;
+    height: 81vh;
+    overflow-x: hidden;
+}
+
+#chat{
+    cursor: pointer;
+}
+.bi-chat-right-dots:hover{
+    color: var(--first-color);
+}
+@media (max-width: 600px) {
+    .input-group {
+        width: 100%;
+    }
+    #all_messages{
+        padding: 10px !important;
+    }
+}

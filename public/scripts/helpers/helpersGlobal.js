@@ -117,3 +117,48 @@ const formatCellphone = (val) => {
         throw error;
     }
 };
+
+const showSpinner = (ctx , e = false) => {
+    try {
+        if(e){
+            $(e.currentTarget).find(ctx).addClass('d-none')
+            $(e.currentTarget).find(ctx).next('#spinner').removeClass('d-none')
+            return
+        }
+       $(ctx).addClass('d-none')
+        $(ctx).next('#spinner').removeClass('d-none')
+    } catch (error) {
+        throw error;
+    }
+};
+const hideSpinner = (ctx , e = false) => {
+    try {
+        $(ctx).removeClass('d-none')
+        $(ctx).next('#spinner').addClass('d-none')
+    } catch (error) {
+        throw error;
+    }
+};
+
+const getMessageTime = (timestamp) => {
+    const now = new Date();
+    const messageTime = new Date(timestamp);
+    const diff = now - messageTime;
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days >= 2) {
+        return messageTime.toLocaleDateString();
+    } else if (days === 1) {
+        return 'Ontem ' + messageTime.toLocaleTimeString();
+    } else if (hours > 0) {
+        return `há ${hours} horas, ${minutes % 60} minutos`;
+    } else if (minutes > 0) {
+        return `há ${minutes} minutos`;
+    } else {
+        return 'Agora';
+    }
+};
+

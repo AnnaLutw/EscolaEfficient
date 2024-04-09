@@ -38,6 +38,7 @@ const createStudent = async (student) => {
             student.contact,
             student.turma,
             student.status,
+            '',
             passwordHash
         );
 

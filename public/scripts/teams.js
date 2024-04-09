@@ -92,6 +92,8 @@ const listAllTeams = (content)=>{
             $(model).find('#students_size').text(val.students.length)
             $(model).find('#delete').attr('val', val._id).text('Desativar')
             $(model).find('#edit').attr('val', val._id)
+            $(model).find('#chat').attr('val', val._id)
+            $(model).find('#see_students').attr('val', val._id)
             $(model).find('#status').text('Ativado').removeClass('text-danger').addClass('text-success')
 
             if(val.status == 0){
@@ -161,7 +163,79 @@ const deleteStudent = async (id, teamId) => {
     }
 };
 
+const createMesage = async()=>{
+    try{
+        console.log('entrou')
 
+        const text = $('#text_send').val()
+        console.log(text)
+        const team = $('.modal_chat').attr('val')
+
+        const body = {
+            text:text,
+            team:team
+        }
+        const {status, content} =  await request('POST', `team/message`, body)
+        if(status !== 200 ){
+            messagesHandler.messageError(content, true)
+            return
+        } 
+        const id =$('.modal_chat').attr('val')
+        await list(`team/message/${id}`, listAllMessages)
+
+    }catch(error){
+        messagesHandler.messageError(error);
+    }
+}
+const listAllMessages = (content) => {
+    try {
+        $('#team_name').text(content.team.name);
+        const ctx = '#all_messages';
+
+        $(ctx).empty();
+        content.myMessages.forEach(message => {
+            message.myMessage = true;
+        });
+
+        const allMessages = [...content.myMessages, ...content.otherMessages];
+        const sortedMessages = allMessages.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+
+        sortedMessages.forEach((message) => {
+            const isMyMessage = message.myMessage === true;
+            const messageTemplate = isMyMessage ? $('#model_my_message').clone()[0] : $('#model_other_message').clone()[0];
+            renderMessage(messageTemplate, message, ctx);
+        });
+
+        $(ctx).scrollTop($(ctx)[0].scrollHeight);
+    } catch (error) {
+        messagesHandler.messageError(error);
+    }
+};
+
+const renderMessage = (messageTemplate, message, ctx) => {
+    try {
+        const userName = message.user ? message.user.name : 'Professor';
+        const messageTime = getMessageTime(message.createdAt);
+
+        $(messageTemplate).find('#text').text(message.text);
+        $(messageTemplate).find('#hour').text(messageTime);
+        $(messageTemplate).find('#picture').attr('src', message.user ? (message.user.picture ? message.user.picture : 'https://i.pinimg.com/564x/51/65/bb/5165bbc3564b4296c70371b75c9774b0.jpg') : 'https://i.pinimg.com/564x/51/65/bb/5165bbc3564b4296c70371b75c9774b0.jpg');
+        $(messageTemplate).find('#user').text(userName);
+
+        $(ctx).append(messageTemplate);
+        $(messageTemplate).removeClass('d-none');
+    } catch (error) {
+        messagesHandler.messageError(error);
+    }
+};
+
+const listAllStudents = (content)=>{
+    try{
+        
+    }catch(error){
+        messagesHandler.messageError(error)
+    }
+}
 list('team', listAllTeams)
 $(document).ready(() => {
 
@@ -240,6 +314,55 @@ $(document).ready(() => {
     $('body').on('click', '#delete', (e) => {
         try {
             deleteTeam($(e.currentTarget).attr('val'))
+        } catch (error) {
+            messagesHandler.messageError(error)
+
+        }
+    });
+    $('body').on('click', '#chat',async (e) => {
+        try {
+            showSpinner('.bi-chat-right-dots', e)
+
+            const id = $(e.currentTarget).attr('val')
+            $('.modal_chat').attr('val', id)
+
+            await list(`team/message/${id}`, listAllMessages)
+            $('.modal_chat').offcanvas('show'); 
+
+            hideSpinner('.bi-chat-right-dots', e)
+        } catch (error) {
+            messagesHandler.messageError(error)
+
+        }
+    });
+    $('.modal_chat').on('click' , '#btn_send_message' , async(e)=>{
+        try {
+            showSpinner('#btn_send_message')
+            await createMesage()
+             $('#text_send').val('')
+             hideSpinner('#btn_send_message')
+        } catch (error) {
+            messagesHandler.messageError(error)
+
+        }
+    })
+    $('#text_send').keypress(async (e) => {
+        if (e.which === 13 || e.keyCode === 13) {
+            e.preventDefault(); // Prevent the default Enter action (submitting the form)
+            $('#btn_send_message').click();
+        }
+    });
+    $('body').on('click', '#see_students',async (e) => {
+        try {
+            // showSpinner('.bi-chat-right-dots', e)
+
+            const id = $(e.currentTarget).attr('val')
+            $('.modal_chat').attr('val', id)
+
+            await list(`team/student/all/${id}`, listAllStudents)
+            $('.modal_chat').offcanvas('show'); 
+
+            // hideSpinner('.bi-chat-right-dots', e)
         } catch (error) {
             messagesHandler.messageError(error)
 

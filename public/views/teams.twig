@@ -15,6 +15,7 @@
 		<div class="col">Professor</div>
 		<div class="col">Quantidade alunos</div>
 		<div class="col">Status</div>
+		<div class="col">Chat</div>
 		<div class="col">Ação</div>
 	</div>
 	<div id="all_teams"></div>
@@ -23,6 +24,11 @@
 		<div id="teacher" class="col"></div>
 		<div id="students_size" class="col"></div>
 		<div id="status" class="col"></div>
+		<div id="chat" class="col">
+		<i class="fs-4 bi-chat-right-dots"></i>
+		{%include './spinner.twig'%}
+		</div>
+		
 		<div class="dropdown col">
 			<i class="bi bi-three-dots" data-bs-toggle="dropdown"></i>
 
@@ -37,7 +43,10 @@
 					<li>
 						<a id="delete" class="dropdown-item" href="#">Desativar</a>
 					</li>
+					
 				{% endif %}
+				{# {% if type != 'user' %} #}
+				{# {% endif %} #}
 			</ul>
 		</div>
 	</div>
@@ -111,4 +120,64 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="offcanvas offcanvas-end modal_chat" tabindex="-1"  aria-labelledby="offcanvasTopLabel">
+  <div class="offcanvas-header border border-bottom">
+    <h5 class="offcanvas-title" id="team_name">SALA X</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body p-0">
+	<div id="all_messages" class="p-2"></div>
+	{%include './spinner.twig'%}
+	<div id="model_other_message" class="d-none mb-4">
+			<div class="row">
+				<div class="col-lg-1 col-2">
+					<img width="40"  id="picture" class="rounded-circle" src="https://uploads.metropoles.com/wp-content/uploads/2023/07/17124030/F1K-cdbXwAgovdo-1.jpg" />
+				</div>
+				<div  class="col-5">
+					<div class="col-12 text-start">
+						<small id="user" class="m-1 fw-bold">Ana Luiza</small>
+					</div>
+					<div  id="message_block" class="col-12 rounded p-2">
+						<div class="col-12">
+							<p id="text" class="m-0">Mensagem 1 teste</p>
+						</div>
+					</div>
+					<div class="col-12 text-end">
+							<small id="hour">14:20</small>
+					</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<div id="model_my_message" class="d-none mb-4">
+		<div class="row justify-content-end">
+			<div  class="col-5">
+				<div class="col-12 text-end">
+					<small id="user"  class="m-1 fw-bold">Ana Luiza</small>
+				</div>
+				<div id="message_block" class="col-12 rounded p-2">
+					<div class="col-12">
+						<p id="text" class="m-0">Mensagem 1 teste</p>
+					</div>
+				</div>
+				<div class="col-12">
+					<small id="hour">14:20</small>
+					
+				</div>
+			</div>
+			<div class="col-lg-1 col-2">
+				<img width="40" id="picture" class="rounded-circle" src="https://uploads.metropoles.com/wp-content/uploads/2023/07/17124030/F1K-cdbXwAgovdo-1.jpg" />
+			</div>
+		</div>
+    </div>
+		<div class="input-group">
+			<input id="text_send" type="text" class="form-control p-3" aria-label="Dollar amount (with dot and two decimal places)">
+			<span id="btn_send_message" class="input-group-text p-3"><i class="fs-4 bi-send"></i></span>
+			{%include './spinner.twig'%}
+		</div>
+  </div>
 </div>
