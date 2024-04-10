@@ -3,37 +3,50 @@
     <i class='bx bx-menu' id="header-toggle"></i>
   </div>
 
- {% if type != 'user' %}
-  <a href="/minha-conta" class="col-lg-2 col-12" href="minha-conta">
-    <div class="row align-items-center">
-    
-      <div class="header_img col-1">
-          <img id="view_picture" src="https://i.imgur.com/hczKIze.jpg" alt="">
-         
-      </div>
-      <div id="user_name" class="user_name col">
-          Ana Luiza
-      </div>
-    </div>
-    
-  </a>
- {% endif %}  
- {% if type == 'user' %}
- <div href="/minha-conta" class="col-2" href="minha-conta">
-    <div class="row align-items-center">
-    
-      <div class="header_img col-1">
-        <i class="fs-3  bi-people"></i>
-         
-      </div>
-      <div id="user_name" class="user_name col">
-          Ana Luiza
-      </div>
-    </div>
-      
-  </div>
-  {% endif %}
+<div class="col-9">
+  <div class="row justify-content-end">
+      {% if type != 'user' %}
+        <a href="/minha-conta" class="col-lg-3 col-9" href="minha-conta">
+          <div class="row align-items-center">
+          
+            <div class="header_img col-3 col-lg-1" >
+                <img id="view_picture" src="https://i.imgur.com/hczKIze.jpg" alt="">
+              
+            </div>
+            <div id="user_name" class="user_name col">
+                Ana Luiza
+            </div>
+          </div>
+          
+        </a>
+      {% endif %}  
+      {% if type == 'user' %}
+      <div href="/minha-conta" class="col-2" href="minha-conta">
+          <div class="row align-items-center">
+          
+            <div class="header_img col-1">
+              <i class="fs-3  bi-people"></i>
+              
+            </div>
+            <div id="user_name" class="user_name col">
+                Ana Luiza
+            </div>
+          </div>
+            
+        </div>
+        {% endif %}
 
+        {# <div class="col-1"  id="open_chats">
+          <i class="fs-4 bi-chat-right-dots"></i>
+          Chats
+          
+          {%include '../views/spinner.twig'%}
+          </div>
+            
+        </div> #}
+  </div>
+</div>
+ 
 </header>
 
 <div class="l-navbar" id="nav-bar">

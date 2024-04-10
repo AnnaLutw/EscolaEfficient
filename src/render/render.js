@@ -124,7 +124,7 @@ router.get('/calendario', async function(req, res){
         template:"../views/calendar.twig",
         sidebar,
         style: '../styles/calendar.css',
-        title:'Calendario escolar',
+        title:'Calendario do aluno',
         script:'../scripts/calendar.js',
         type
     });

@@ -1,9 +1,27 @@
+.section_calendar {
+  display: flex;
+  align-items: center;
+  height: 94vh;
+  align-items: flex-start;
+}
+.section{
+  overflow: hidden;
+}
 #calendar {
-    max-width: 95%;
-    margin: 0 auto;
-    height: 88%;
+  width: 144%;
+  height: 85%;
+}
 
-  }
+#calendar_legend {
+  margin-left: 69px;
+  height: 47%;
+  margin-right: 38px;
+  width: 33%;
+  background-color: #f9ecdb;
+  margin-top: 15vh;
+  align-items: center;
+}
+
   a {
     color: black;
 }
@@ -23,3 +41,24 @@
 .fc-daygrid-event.fc-event-end {
   background-color: blue;
 } */
+
+@media (max-width: 600px) {
+  .section{
+    overflow-y: auto;
+  }
+  .section_calendar {
+    height: auto;
+    flex-direction: column;
+  }
+  #calendar {
+    width: 100%;
+  }
+  #calendar_legend {
+    margin-left: 0px;
+    height: auto;
+    margin-right: 0px;
+    width: auto;
+    background-color: #f9ecdb;
+    margin-top: 20px;
+  }
+}

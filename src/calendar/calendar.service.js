@@ -17,7 +17,7 @@ const getAll = async () => {
 const createEvent = async (calendar) => {
     try {
         console.log(calendar)
-        const calendars = new CalendarDTO(null, calendar.event, calendar.start, calendar.end);
+        const calendars = new CalendarDTO(null, calendar.event, calendar.start, calendar.end , calendar.type);
         await create(CalendarModel.schema, calendars, 'calendars'); 
         return {content: 'created',status: 200};
 
@@ -26,7 +26,15 @@ const createEvent = async (calendar) => {
     }
 };
 
+const getAllTypes = () => {
+    try {
+        const eventTypes = CalendarDTO.eventTypes; 
+        console.log(eventTypes);
+        return { content: eventTypes, status: 200 };
+    } catch (error) {
+        return { error: error.message, status: 500 };
+    }
+};
 
 
-
-module.exports = {  getAll, createEvent};
+module.exports = {  getAll, createEvent, getAllTypes};
