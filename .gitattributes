@@ -1,0 +1,3 @@
+*.js linguist-language=JavaScript
+*.json linguist-language=JSON
+*.yml linguist-language=YAML
