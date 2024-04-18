@@ -21,7 +21,7 @@
   "description": "college work",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    // "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ana Luiza",
   "license": "ISC"
