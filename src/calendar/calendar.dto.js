@@ -1,10 +1,11 @@
 class CalendarDTO {
-    constructor(id, event , start, end, type) {
+    constructor(id, event , start, end, type, team) {
         this.id = id; 
         this.event = event;
         this.start = start;
         this.end = end;
         this.type = type;
+        this.team = team;
     }
 
     static get eventTypes() {

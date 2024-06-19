@@ -84,7 +84,7 @@ const closeModal = (ctx)=>{
 const listUser = (content)=>{
     try{
         const ctx = '.user_section'
-        $('#user_name').text(content.name)
+        $('#user_name').text(content.name).attr('val' , content._id)
         $(ctx).find('#email').val(content.email)
         $(ctx).find('#save').attr('val' , content._id)
         $(ctx).find('#view_picture').attr('src' , content.picture)

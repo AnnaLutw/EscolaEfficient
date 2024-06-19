@@ -28,6 +28,7 @@ const gradeController = require('./src/grade/grade.controller.js');
 const calendarController = require('./src/calendar/calendar.controller.js');
 const UserController = require('./src/user/user.controller.js');
 const NewsController = require('./src/news/news.controller.js');
+const BooksController = require('./src/book/book.controller.js');
 
 app.use('/api', teacherController);
 app.use('/api', studentController);
@@ -36,6 +37,7 @@ app.use('/api', gradeController);
 app.use('/api', calendarController);
 app.use('/api', UserController);
 app.use('/api', NewsController);
+app.use('/api', BooksController);
 
 app.set("twig options", {
     allowAsync: true,

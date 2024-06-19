@@ -7,6 +7,7 @@ const saveEvent = async () => {
         const endEvent = $('.modal_calendar').find('#end').val();
         const startEvent = $('.modal_calendar').find('#start').val();
         const type = $('.modal_calendar').find('#event_type').val();
+        const team = $('.modal_calendar').find('#team').val();
         
         const start = new Date(startEvent);
         const end = new Date(endEvent);
@@ -16,7 +17,7 @@ const saveEvent = async () => {
         start.setUTCHours(hourPart);
         start.setUTCMinutes(minutePart);
 
-        const { content, status } = await request('POST', `calendar`, { event: event, start: start, end:end, type:type});
+        const { content, status } = await request('POST', `calendar`, { event, start, end, type, team});
         if (status !== 200) {
             messagesHandler.messageError(content);
         } else {
@@ -123,18 +124,23 @@ const mapEventTypeToText = (eventType) => {
   }
 };
 
-const listEventType = (content) => {
+const listEventType = (content, ctx) => {
   try {
-    const ctx = '#event_type';
     $(ctx).empty(); 
 
-    content.forEach(val => {
-      const text = mapEventTypeToText(val); 
-      $(ctx).append($('<option>', {
-        value: val,
-        text: text
-      }));
-    });
+    if(content.lenght != 0){
+      content.forEach(val => {
+        const text = mapEventTypeToText(val); 
+        $(ctx).append($('<option>', {
+          value: val._id ? val._id : val,
+          text: val.name ?  val.name : text 
+        }));
+      });
+    }else{
+      $(ctx).append('<option> Sem turmas adicionadas </option>'); 
+      $('.modal_calendar ').find('#save').attr('disabled', 'disabled')
+    }
+    
 
   } catch (error) {
     console.log(error);
@@ -156,9 +162,14 @@ $(document).ready(async () =>{
         }
     });
 
-    $('#new_event').on('click' , ()=>{
+    $('#new_event').on('click' ,async ()=>{
         try{
-        list('calendar/type', listEventType)
+        let {content} = await request('GET','calendar/type')
+        listEventType(content , '#event_type')
+
+        const res = await request('GET','team',)
+        listEventType(res.content, '#team')
+
             $('.modal_calendar').offcanvas('show')
         }catch(error){
             console.log(error)

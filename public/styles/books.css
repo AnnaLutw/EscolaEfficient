@@ -1,0 +1,8 @@
+.all_books{
+    justify-content: space-evenly
+}
+.books_borrowed{
+    background-color: white;
+    border-radius: 18px;
+    border: 1px solid #dee2e6;
+}

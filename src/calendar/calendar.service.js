@@ -1,23 +1,44 @@
 const mongoose = require('mongoose');
-const { create } = require('../helpers/helpers');
+const { create, getUser } = require('../helpers/helpers');
 const CalendarDTO = require('./calendar.dto');
 const CalendarModel = require('./calendar.model');
-
-
-const getAll = async () => {
+const TeamModel = require('../student/student.model');
+const getAll = async (headers) => {
     try {
-        const caledars = await CalendarModel.find()
+        let calendars;
 
-        return { content: caledars, status: 200 };
+        const userResponse = await getUser(headers); 
+        if (userResponse.error) {
+            return userResponse; 
+        }
+        const user = userResponse.content;
+
+        if (user.type === 'user') {
+            calendars = await CalendarModel.find();
+        } else if (user.type === 'teacher') {
+            const team = await TeamModel.find({ teacher: user._id });
+            console.log(team);
+            team ?   calendars = await CalendarModel.find({ team: team._id }) :  calendars = []
+        } else {
+            const team = await TeamModel.find({ students: user._id });
+            team ?   calendars = await CalendarModel.find({ team: team._id }) :  calendars = []
+        }
+
+        const emptyCalendars = await CalendarModel.find({ team: { $exists: false } });
+        
+        calendars = calendars.concat(emptyCalendars);
+
+        return { content: calendars, status: 200 };
     } catch (error) {
         return { error: error.message, status: 500 };
     }
 };
 
+
+
 const createEvent = async (calendar) => {
     try {
-        console.log(calendar)
-        const calendars = new CalendarDTO(null, calendar.event, calendar.start, calendar.end , calendar.type);
+        const calendars = new CalendarDTO(null, calendar.event, calendar.start, calendar.end , calendar.type, calendar.team);
         await create(CalendarModel.schema, calendars, 'calendars'); 
         return {content: 'created',status: 200};
 
@@ -29,7 +50,6 @@ const createEvent = async (calendar) => {
 const getAllTypes = () => {
     try {
         const eventTypes = CalendarDTO.eventTypes; 
-        console.log(eventTypes);
         return { content: eventTypes, status: 200 };
     } catch (error) {
         return { error: error.message, status: 500 };

@@ -85,25 +85,30 @@ const listAllTeams = (content)=>{
     try{
         const ctx =   '#all_teams'  
         $(ctx).empty()
-        content.forEach(val =>{
-            const model = $('#model_teams').clone()[0]
-            $(model).find('#name').text(val.name)
-            $(model).find('#teacher').text(val.teacher.name)
-            $(model).find('#students_size').text(val.students.length)
-            $(model).find('#delete').attr('val', val._id).text('Desativar')
-            $(model).find('#edit').attr('val', val._id)
-            $(model).find('#chat').attr('val', val._id)
-            $(model).find('#see_students').attr('val', val._id)
-            $(model).find('#status').text('Ativado').removeClass('text-danger').addClass('text-success')
-
-            if(val.status == 0){
-                $(model).find('#status').text('Desativado').removeClass('text-success').addClass('text-danger')
-            $(model).find('#delete').attr('val', val._id).text('Ativar')
-
-            }
-            $(model).removeClass('d-none')
-            $(ctx).append(model)
-        });
+        if(content.length !=0){
+            content.forEach(val =>{
+                const model = $('#model_teams').clone()[0]
+                $(model).find('#name').text(val.name)
+                $(model).find('#teacher').text(val.teacher.name)
+                $(model).find('#students_size').text(val.students.length)
+                $(model).find('#delete').attr('val', val._id).text('Desativar')
+                $(model).find('#edit').attr('val', val._id)
+                $(model).find('#chat').attr('val', val._id)
+                $(model).find('#see_students').attr('val', val._id)
+                $(model).find('#status').text('Ativado').removeClass('text-danger').addClass('text-success')
+    
+                if(val.status == 0){
+                    $(model).find('#status').text('Desativado').removeClass('text-success').addClass('text-danger')
+                $(model).find('#delete').attr('val', val._id).text('Ativar')
+    
+                }
+                $(model).removeClass('d-none')
+                $(ctx).append(model)
+            });
+        }else{
+            $(ctx).append('Sem turmas adicionadas')
+        }
+       
     }catch(error){
         console.log(error);
     }

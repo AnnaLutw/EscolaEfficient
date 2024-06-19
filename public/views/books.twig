@@ -1,0 +1,66 @@
+
+  <div class="container-fluid mt-4">
+    <div class="row justify-content-around text-center">
+         <div class="col-8">
+            <h2 >{{title}}</h2>
+
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <button id="prevBtn" class="btn default_outline_btn mr-2" disabled>Anterior</button>
+                    <button id="nextBtn" class="btn default_btn">Próximo</button>
+                </div>
+            </div>
+            
+            <div class="all_books row p-2"> </div>
+
+            <div class="row mt-4">
+                <div class="col text-center">
+                <button id="prevBtn" class="btn default_outline_btn mr-2" disabled>Anterior</button>
+                <button id="nextBtn" class="btn default_btn">Próximo</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 books_borrowed">
+            <h3 class="fw-bold mt-3">Livros com você</h3>
+            <div class="all_borrowed_books row justify-content-center"></div>
+            <div class="model_borrowed_books col-4 d-none m-1">
+                <img id="book_banner" src="" class="card-img-top" alt="Banner do Livro">
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+<div class="col-2 card d-none model_book m-1 mb-4">
+    <img id="book_banner" src="" class="card-img-top" alt="Banner do Livro">
+    <div class="card-body">
+        <h5 id="book_title" class="card-title">TESTE</h5>
+    </div>
+</div>
+
+
+<div class="modal modal_book" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title book_title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-4">
+                    <img src="" class="card-img-top book_banner" alt="Banner do Livro">
+                </div>
+                  <div class="col-7">
+                           <p class="book_desacription"></p>
+                </div>
+            </div>        
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn default_outline_btny" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn default_btn">Pegar emprestado</button>
+      </div>
+    </div>
+  </div>
+</div>

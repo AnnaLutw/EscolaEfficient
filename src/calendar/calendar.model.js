@@ -5,6 +5,7 @@ const calendarSchema = new mongoose.Schema({
     start:{ type: Date, required: true },
     end:{ type: Date },
     type:{ type:String, required: true },
+    team: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
 }, { timestamps: true });
 
 const Calendar = mongoose.model('Calendar', calendarSchema);

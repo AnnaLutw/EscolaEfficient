@@ -5,7 +5,7 @@ const service = require('./calendar.service');
 
 router.get('/calendar', async (req, res) => {
     try {
-        const calendarCreated = await service.getAll(); 
+        const calendarCreated = await service.getAll(req); 
         res.status(200).json(calendarCreated); 
     } catch (error) {
         res.status(500).json({ error: error.message }); 

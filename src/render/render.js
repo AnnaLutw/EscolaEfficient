@@ -142,4 +142,19 @@ router.get('/registrar', async function(req, res){
         type
     });
 });
+
+router.get('/livros', async function(req, res){
+    const {userType} = await getUserByCookie(req);
+    console.log(userType)
+    const type = userType
+    sidebar = true
+    res.render('index.twig', {
+        template:"../views/books.twig",
+        sidebar,
+        style: '../styles/books.css',
+        title:'Biblioteca escolar',
+        script:'../scripts/books.js',
+        type
+    });
+});
 module.exports = router;
