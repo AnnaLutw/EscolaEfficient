@@ -190,13 +190,10 @@ const getUser = async (req) => {
 
 const getUserByCookie = async(req) =>{
     try {
-        console.log(secretKey)
         const token = req.cookies._auth_; 
 
         if (token) {
             const type = jwt.verify(token, secretKey);
-        console.log(type)
-
             return type;
         } else {
             return { error: 'Token não fornecido', status: 401 };

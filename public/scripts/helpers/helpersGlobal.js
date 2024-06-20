@@ -140,6 +140,14 @@ const hideSpinner = (ctx , e = false) => {
     }
 };
 
+const formatDate = (date) => {
+    return date.toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+  };
+  
 const getMessageTime = (timestamp) => {
     const now = new Date();
     const messageTime = new Date(timestamp);

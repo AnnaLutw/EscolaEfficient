@@ -87,14 +87,6 @@ const getAllStudents = async () => {
     }
 };
 
-
-
-
-
-
-
-
-
 const changeStatusById = async (id) => {
     try {
         let student = await studentModel.findById(id);
